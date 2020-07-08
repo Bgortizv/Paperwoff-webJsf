@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewBolsaPagosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewBolsaPagosLabel_idBolsaPagos}"/>
+                    <h:outputText value="#{bolsaPagosController.selected.idBolsaPagos}" title="#{bundle.ViewBolsaPagosTitle_idBolsaPagos}"/>
+                    <h:outputText value="#{bundle.ViewBolsaPagosLabel_totalAbonos}"/>
+                    <h:outputText value="#{bolsaPagosController.selected.totalAbonos}" title="#{bundle.ViewBolsaPagosTitle_totalAbonos}"/>
+                    <h:outputText value="#{bundle.ViewBolsaPagosLabel_totalDescuentos}"/>
+                    <h:outputText value="#{bolsaPagosController.selected.totalDescuentos}" title="#{bundle.ViewBolsaPagosTitle_totalDescuentos}"/>
+                    <h:outputText value="#{bundle.ViewBolsaPagosLabel_estudiantesidEstudiantes}"/>
+                    <h:outputText value="#{bolsaPagosController.selected.estudiantesidEstudiantes}" title="#{bundle.ViewBolsaPagosTitle_estudiantesidEstudiantes}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{bolsaPagosController.destroyAndView}" value="#{bundle.ViewBolsaPagosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewBolsaPagosEditLink}"/>
+                <br />
+                <h:commandLink action="#{bolsaPagosController.prepareCreate}" value="#{bundle.ViewBolsaPagosCreateLink}" />
+                <br />
+                <h:commandLink action="#{bolsaPagosController.prepareList}" value="#{bundle.ViewBolsaPagosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewBolsaPagosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

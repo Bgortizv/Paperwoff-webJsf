@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditFacturaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_idFactura}" for="idFactura" />
+                    <h:inputText id="idFactura" value="#{facturaController.selected.idFactura}" title="#{bundle.EditFacturaTitle_idFactura}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_idFactura}"/>
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{facturaController.selected.fecha}" title="#{bundle.EditFacturaTitle_fecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_total}" for="total" />
+                    <h:inputText id="total" value="#{facturaController.selected.total}" title="#{bundle.EditFacturaTitle_total}" />
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_fechaCreacion}" for="fechaCreacion" />
+                    <h:inputText id="fechaCreacion" value="#{facturaController.selected.fechaCreacion}" title="#{bundle.EditFacturaTitle_fechaCreacion}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_incioPeriodo}" for="incioPeriodo" />
+                    <h:inputText id="incioPeriodo" value="#{facturaController.selected.incioPeriodo}" title="#{bundle.EditFacturaTitle_incioPeriodo}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_finPeriodo}" for="finPeriodo" />
+                    <h:inputText id="finPeriodo" value="#{facturaController.selected.finPeriodo}" title="#{bundle.EditFacturaTitle_finPeriodo}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_totalhoras}" for="totalhoras" />
+                    <h:inputText id="totalhoras" value="#{facturaController.selected.totalhoras}" title="#{bundle.EditFacturaTitle_totalhoras}" />
+                    <h:outputLabel value="#{bundle.EditFacturaLabel_tutoresidTutores}" for="tutoresidTutores" />
+                    <h:selectOneMenu id="tutoresidTutores" value="#{facturaController.selected.tutoresidTutores}" title="#{bundle.EditFacturaTitle_tutoresidTutores}" required="true" requiredMessage="#{bundle.EditFacturaRequiredMessage_tutoresidTutores}">
+                        <f:selectItems value="#{tutoresController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{facturaController.update}" value="#{bundle.EditFacturaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditFacturaViewLink}"/>
+                <br />
+                <h:commandLink action="#{facturaController.prepareList}" value="#{bundle.EditFacturaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditFacturaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
