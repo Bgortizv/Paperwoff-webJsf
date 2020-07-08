@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewVirpresTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewVirpresLabel_idVirPres}"/>
+                    <h:outputText value="#{virpresController.selected.idVirPres}" title="#{bundle.ViewVirpresTitle_idVirPres}"/>
+                    <h:outputText value="#{bundle.ViewVirpresLabel_descrip}"/>
+                    <h:outputText value="#{virpresController.selected.descrip}" title="#{bundle.ViewVirpresTitle_descrip}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{virpresController.destroyAndView}" value="#{bundle.ViewVirpresDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewVirpresEditLink}"/>
+                <br />
+                <h:commandLink action="#{virpresController.prepareCreate}" value="#{bundle.ViewVirpresCreateLink}" />
+                <br />
+                <h:commandLink action="#{virpresController.prepareList}" value="#{bundle.ViewVirpresShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewVirpresIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

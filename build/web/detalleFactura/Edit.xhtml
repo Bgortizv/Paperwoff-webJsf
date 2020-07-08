@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditDetalleFacturaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditDetalleFacturaLabel_idDetalleFactura}" for="idDetalleFactura" />
+                    <h:inputText id="idDetalleFactura" value="#{detalleFacturaController.selected.idDetalleFactura}" title="#{bundle.EditDetalleFacturaTitle_idDetalleFactura}" required="true" requiredMessage="#{bundle.EditDetalleFacturaRequiredMessage_idDetalleFactura}"/>
+                    <h:outputLabel value="#{bundle.EditDetalleFacturaLabel_cantidadHoras}" for="cantidadHoras" />
+                    <h:inputText id="cantidadHoras" value="#{detalleFacturaController.selected.cantidadHoras}" title="#{bundle.EditDetalleFacturaTitle_cantidadHoras}" />
+                    <h:outputLabel value="#{bundle.EditDetalleFacturaLabel_valorTotal}" for="valorTotal" />
+                    <h:inputText id="valorTotal" value="#{detalleFacturaController.selected.valorTotal}" title="#{bundle.EditDetalleFacturaTitle_valorTotal}" />
+                    <h:outputLabel value="#{bundle.EditDetalleFacturaLabel_asignaturaidAsignatura}" for="asignaturaidAsignatura" />
+                    <h:selectOneMenu id="asignaturaidAsignatura" value="#{detalleFacturaController.selected.asignaturaidAsignatura}" title="#{bundle.EditDetalleFacturaTitle_asignaturaidAsignatura}" required="true" requiredMessage="#{bundle.EditDetalleFacturaRequiredMessage_asignaturaidAsignatura}">
+                        <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditDetalleFacturaLabel_facturaidFactura}" for="facturaidFactura" />
+                    <h:selectOneMenu id="facturaidFactura" value="#{detalleFacturaController.selected.facturaidFactura}" title="#{bundle.EditDetalleFacturaTitle_facturaidFactura}" required="true" requiredMessage="#{bundle.EditDetalleFacturaRequiredMessage_facturaidFactura}">
+                        <f:selectItems value="#{facturaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{detalleFacturaController.update}" value="#{bundle.EditDetalleFacturaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditDetalleFacturaViewLink}"/>
+                <br />
+                <h:commandLink action="#{detalleFacturaController.prepareList}" value="#{bundle.EditDetalleFacturaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditDetalleFacturaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

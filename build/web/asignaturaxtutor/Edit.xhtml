@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAsignaturaxtutorTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAsignaturaxtutorLabel_idAxT}" for="idAxT" />
+                    <h:inputText id="idAxT" value="#{asignaturaxtutorController.selected.idAxT}" title="#{bundle.EditAsignaturaxtutorTitle_idAxT}" required="true" requiredMessage="#{bundle.EditAsignaturaxtutorRequiredMessage_idAxT}"/>
+                    <h:outputLabel value="#{bundle.EditAsignaturaxtutorLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{asignaturaxtutorController.selected.estado}" title="#{bundle.EditAsignaturaxtutorTitle_estado}" />
+                    <h:outputLabel value="#{bundle.EditAsignaturaxtutorLabel_tutoresidTutores}" for="tutoresidTutores" />
+                    <h:selectOneMenu id="tutoresidTutores" value="#{asignaturaxtutorController.selected.tutoresidTutores}" title="#{bundle.EditAsignaturaxtutorTitle_tutoresidTutores}" required="true" requiredMessage="#{bundle.EditAsignaturaxtutorRequiredMessage_tutoresidTutores}">
+                        <f:selectItems value="#{tutoresController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditAsignaturaxtutorLabel_asignaturaidAsignatura}" for="asignaturaidAsignatura" />
+                    <h:selectOneMenu id="asignaturaidAsignatura" value="#{asignaturaxtutorController.selected.asignaturaidAsignatura}" title="#{bundle.EditAsignaturaxtutorTitle_asignaturaidAsignatura}" required="true" requiredMessage="#{bundle.EditAsignaturaxtutorRequiredMessage_asignaturaidAsignatura}">
+                        <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{asignaturaxtutorController.update}" value="#{bundle.EditAsignaturaxtutorSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAsignaturaxtutorViewLink}"/>
+                <br />
+                <h:commandLink action="#{asignaturaxtutorController.prepareList}" value="#{bundle.EditAsignaturaxtutorShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAsignaturaxtutorIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

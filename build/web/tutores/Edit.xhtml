@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTutoresTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTutoresLabel_idTutores}" for="idTutores" />
+                    <h:inputText id="idTutores" value="#{tutoresController.selected.idTutores}" title="#{bundle.EditTutoresTitle_idTutores}" required="true" requiredMessage="#{bundle.EditTutoresRequiredMessage_idTutores}"/>
+                    <h:outputLabel value="#{bundle.EditTutoresLabel_fechaIngreso}" for="fechaIngreso" />
+                    <h:inputText id="fechaIngreso" value="#{tutoresController.selected.fechaIngreso}" title="#{bundle.EditTutoresTitle_fechaIngreso}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTutoresLabel_profesion}" for="profesion" />
+                    <h:inputText id="profesion" value="#{tutoresController.selected.profesion}" title="#{bundle.EditTutoresTitle_profesion}" />
+                    <h:outputLabel value="#{bundle.EditTutoresLabel_usersidUser}" for="usersidUser" />
+                    <h:selectOneMenu id="usersidUser" value="#{tutoresController.selected.usersidUser}" title="#{bundle.EditTutoresTitle_usersidUser}" required="true" requiredMessage="#{bundle.EditTutoresRequiredMessage_usersidUser}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{tutoresController.update}" value="#{bundle.EditTutoresSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTutoresViewLink}"/>
+                <br />
+                <h:commandLink action="#{tutoresController.prepareList}" value="#{bundle.EditTutoresShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTutoresIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
