@@ -9,7 +9,7 @@ import jpa.entidades.Estudiantes;
 import jpa.entidades.Tutores;
 import jpa.entidades.Tutorias;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-13T19:58:09")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-13T23:26:02")
 @StaticMetamodel(Users.class)
 public class Users_ { 
 
