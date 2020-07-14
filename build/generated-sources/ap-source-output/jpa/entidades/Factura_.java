@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import jpa.entidades.DetalleFactura;
 import jpa.entidades.Tutores;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-06-10T21:56:07")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-13T19:08:40")
 @StaticMetamodel(Factura.class)
 public class Factura_ { 
 
