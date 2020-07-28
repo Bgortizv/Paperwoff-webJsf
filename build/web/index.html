@@ -1,51 +1,41 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Paperwoff - Home</title>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <title>Paperwoff</title>
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Mis estilos-->
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap" rel="stylesheet">
+        
         <h:outputStylesheet name="/css/bootstrap.css"/>
-        <h:outputStylesheet name="/css/bootstrap.min.css"/>
         <h:outputStylesheet name="/css/styles.css"/>
         <h:outputStylesheet name="/css/custom.css"/>
         <h:outputStylesheet name="/css/default.css"/>
         <h:outputStylesheet name="/css/cssLayout.css"/>
         <h:outputStylesheet name="/vendors/font-awesome/css/font-awesome.min.css"/>
-        <h:outputStylesheet name="/vendors/font-awesome/css/font-awesome.css"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-Black.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-BlackItalic.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-Bold.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-BoldItalic.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-ExtraBold.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-ExtraBoldItalic.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-ExtraLight.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-ExtraLightItalic.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-Italic.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-Light.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-LightItalic.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-Regular.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-SemiBold.ttf"/>
-        <h:outputStylesheet name="/vendors/Nunito/Nunito-SemiBoldItalic.ttf"/>
         <h:outputStylesheet name="/vendors/nprogress/nprogress.css"/>
-        <h:outputStylesheet name="/vendors/bootstrap/scss/_reboot.scss"/>
-        <h:outputScript name="/js/jquery-3.5.1.min.js" />       
-        <h:outputScript name="/js/custom.js" />
-        <h:outputScript name="/js/main.js" />
-        <h:outputScript name="/js/swiper.min.js" />
-        <h:outputScript name="/js/bootstrap-timepicker.min.js" />
+        <h:outputScript  name="/js/jquery-3.5.1.min.js" />        
+        <h:outputScript  name="/js/custom.js" />
+        <h:outputScript  name="/js/main.js" />
+        <h:outputScript  name="/js/swiper.min.js" />
+        <h:outputScript  name="/js/bootstrap-timepicker.min.js" />
         <h:outputScript name="/js/moment/moment.min.js"/>
         <h:outputScript name="/js/datepicker/daterangepicker.js"/>
-        <style type="text/css">
-            body{
-                font-family: "Nunito", sans-serif;
-                }  
-        </style>
-    </h:head>
-    <h:body>
-   
+</head>
+
+<body id=home>
     <!-- WHATSAPP -->
     <div class="cont-whatsapp-fixed">
-        <a href= "WhatsApp Paperworff" target="_blank"><id class="icon icon-whatsapp-msm"></id></a>
+        <a href="https://api.whatsapp.com/send?phone=+573163187107&text=Hola,%20quisiera%20información%20de%20Paperwoff"
+            target="_blank"><i class="icon icon-whatsapp-msm"></i></a>
     </div>
     <!-- /WHATSAPP -->
 
@@ -53,7 +43,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a href="home.html">
-                <img src="#{resource['images/logo.png']}" class="logo img-fluid"></img>
+                <img src="../images/logo.png" class="logo img-fluid">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
                 aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +66,7 @@
                 </div>
                 <div class="container-fluid inicio-sesion m-0 py-1">
 
-                    <a href="../Inicio_Sesion.xhtml">
+                    <a href="login.html">
                         <button type="button" class="btn btn-outline-secondary">Iniciar
                             sesión</button>
                     </a>
@@ -91,7 +81,7 @@
         <div class="row mt-5">
             <div class="col-md-5 col-12 col-left m-auto px-3">
                 <div class="text-center">
-                    <img src="#{resource['images/logo-blanco.png']}" width="300" alt="" class="py-4"></img>
+                    <img src="../images/logo-blanco.png" width="300" alt="" class="py-4">
                 </div>
                 <div class="text-center py-4">
                     <h3>Conoce PAPERWOFF, la solución ideal para coordinar tu EQUIPO y manejar tus PROYECTOS.</h3>
@@ -120,37 +110,37 @@
                     </div>
                     <div class="row my-5 text-center">
                         <div class="col-12">
-                            <h4>¿Necesitas más información? <br> Escribenos a: </br> <span
+                            <h4>¿Necesitas más información? <br> Escribenos a: <br> <span
                                     class="font-weight-bold">contacto@paperwoff.com</span></h4>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!--<div class="col-md-4 col-12 col-right mx-auto my-5">
+            <div class="col-md-4 col-12 col-right mx-auto my-5">
                 <div class="right-form mx-auto p-3">
                     <div class="hero-card d-flex">
                         <div class="fondo-op">
                             <h5 class="text-center m-auto p-3">
                                 ¿Tu empresa tiene más de 100 empleados?<br>
-                                </br>
+                                <br>
                                 Solicita <b>GRATIS</b> una asesoría de 20 minutos con uno de nuestros expertos.</h5>
                         </div>
                     </div>
                     <div class="card-body px-0">
                         <form id="formSusc" action="">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="nombre"
-                                    aria-describedby="emailHelp" placeholder="Nombre completo"/>
+                                <input type="text" class="form-control" id="nombre" required
+                                    aria-describedby="emailHelp" placeholder="Nombre completo">
                             </div>
                             <div class="form-group">
-                                <input type=" number" class="form-control" id="tlf" 
-                                    placeholder="Teléfono móvil" pattern="\d*" minlength="10" maxlength="10"/>
+                                <input type=" number" class="form-control" id="tlf" required
+                                    placeholder="Teléfono móvil" pattern="\d*" minlength="10" maxlength="10">
                             </div>
 
                             <div class="form-group">
-                                <input type="email" class="form-control" id="email" 
-                                    aria-describedby="emailHelp" placeholder="Correo electrónico"/>
+                                <input type="email" class="form-control" id="email" required
+                                    aria-describedby="emailHelp" placeholder="Correo electrónico">
                             </div>
                             <div class="form-group">
                                 <select class="form-control" id="area" required>
@@ -162,12 +152,12 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="nombre" 
-                                    aria-describedby="emailHelp" placeholder="Nombre de tu empresa"/>
+                                <input type="text" class="form-control" id="nombre" required
+                                    aria-describedby="emailHelp" placeholder="Nombre de tu empresa">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="nombre" required
-                                    aria-describedby="emailHelp" placeholder="Área de tu empresa"/>
+                                    aria-describedby="emailHelp" placeholder="Área de tu empresa">
                             </div>
 
                             <div class="form-group">
@@ -189,12 +179,12 @@
                             <button type="submit" id=""
                                 class="btn btn-light w-100 pt-2 mt-2 ">Suscribirme</button>
                         </form>
-                        
+                        <!-- data-toggle="modal" data-target="#suscrip" -->
 
                     </div>
 
                 </div>
-            </div>-->
+            </div>
         </div>
 
     </section>
@@ -227,7 +217,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 my-3 text-center">
-                    <img src="#{resource['images/home-d.png']}" class="img-fluid img-description" alt=""></img>
+                    <img src="../images/home-d.png" class="img-fluid img-description " alt="">
                 </div>
             </div>
         </div>
@@ -299,18 +289,6 @@
     </script>
 
     <!-- Termina JS de bootstrap -->
-</h:body>
-
-
-
-
-
-
-
-
-
-
-
+</body>
 
 </html>
-

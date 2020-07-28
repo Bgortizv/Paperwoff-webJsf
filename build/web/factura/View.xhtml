@@ -5,11 +5,12 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ViewFacturaTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+   <body>
+
+        <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+
+            
+        <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -37,8 +38,9 @@
                     </h:outputText>
                     <h:outputText value="#{bundle.ViewFacturaLabel_totalhoras}"/>
                     <h:outputText value="#{facturaController.selected.totalhoras}" title="#{bundle.ViewFacturaTitle_totalhoras}"/>
+                    
                     <h:outputText value="#{bundle.ViewFacturaLabel_tutoresidTutores}"/>
-                    <h:outputText value="#{facturaController.selected.tutoresidTutores}" title="#{bundle.ViewFacturaTitle_tutoresidTutores}"/>
+                    <h:outputText value="#{facturaController.selected.tutores.users.nombre}" title="#{bundle.ViewFacturaTitle_tutoresidTutores}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{facturaController.destroyAndView}" value="#{bundle.ViewFacturaDestroyLink}"/>
@@ -56,5 +58,6 @@
             </h:form>
         </ui:define>
     </ui:composition>
-
+       
+   </body>
 </html>

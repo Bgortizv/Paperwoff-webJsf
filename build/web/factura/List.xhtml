@@ -5,11 +5,20 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListFacturaTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+    <body>
+        
+        <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+                    
+        <ui:define name="content">
+            <div class="title_left">
+                            <h3>Cuentas de cobro</h3>
+                        </div>
+
+                        <div class="title_right">
+                            <div class="col-md-5 col-sm-5 col-xs-12 pull-right">
+
+                            </div>
+                        </div>
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -19,62 +28,56 @@
                     <h:outputText value="#{facturaController.pagination.pageFirstItem + 1}..#{facturaController.pagination.pageLastItem + 1}/#{facturaController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{facturaController.previous}" value="#{bundle.Previous} #{facturaController.pagination.pageSize}" rendered="#{facturaController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{facturaController.next}" value="#{bundle.Next} #{facturaController.pagination.pageSize}" rendered="#{facturaController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{facturaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+             
+            <div class="row">            
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                            <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
+                                
+                                <h:dataTable value="#{facturaController.listaFactura}" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline" var="factura" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_idFactura}"/>
+                                <h:outputText value="Documento"/>
                             </f:facet>
-                            <h:outputText value="#{item.idFactura}"/>
+                            <h:outputText value="#{factura.tutores.users.documento}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_fecha}"/>
+                                <h:outputText value="Tutor"/>
                             </f:facet>
-                            <h:outputText value="#{item.fecha}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
+                            <h:outputText value="#{factura.tutores.users.nombre}">
+                                 </h:outputText>&nbsp;
+                                <h:outputText value="#{factura.tutores.users.apellidos}">
+                                </h:outputText>
+                     
+                        </h:column>
+                           <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Total horas"/>
+                            </f:facet>
+                            <h:outputText value="#{factura.totalhoras}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_total}"/>
+                                <h:outputText value="# Factura"/>
                             </f:facet>
-                            <h:outputText value="#{item.total}"/>
+                            <h:outputText value="#{factura.idFactura}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListFacturaTitle_fechaCreacion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fechaCreacion}">
+                            <h:outputText value="#{factura.fechaCreacion}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </h:column>
+                                              
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_incioPeriodo}"/>
+                                <h:outputText value="Total"/>
                             </f:facet>
-                            <h:outputText value="#{item.incioPeriodo}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_finPeriodo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.finPeriodo}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_totalhoras}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.totalhoras}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacturaTitle_tutoresidTutores}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tutoresidTutores}"/>
+                            <h:outputText value="#{factura.total}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -87,6 +90,12 @@
                             <h:commandLink action="#{facturaController.destroy}" value="#{bundle.ListFacturaDestroyLink}"/>
                         </h:column>
                     </h:dataTable>
+                 </div>
+                    </div>
+                </div>
+               
+                </div>
+                    </div>
                 </h:panelGroup>
                 <br />
                 <h:commandLink action="#{facturaController.prepareCreate}" value="#{bundle.ListFacturaCreateLink}"/>
@@ -96,5 +105,5 @@
             </h:form>
         </ui:define>
     </ui:composition>
-
+    </body>
 </html>

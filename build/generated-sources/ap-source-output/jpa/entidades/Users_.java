@@ -6,16 +6,17 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import jpa.entidades.Estudiantes;
+import jpa.entidades.Roles;
 import jpa.entidades.Tutores;
 import jpa.entidades.Tutorias;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-13T23:26:02")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-27T20:30:37")
 @StaticMetamodel(Users.class)
 public class Users_ { 
 
     public static volatile SingularAttribute<Users, String> apellidos;
     public static volatile SingularAttribute<Users, Boolean> estado;
-    public static volatile SingularAttribute<Users, String> role;
+    public static volatile SingularAttribute<Users, Roles> roles;
     public static volatile SingularAttribute<Users, String> direccion;
     public static volatile SingularAttribute<Users, BigInteger> documento;
     public static volatile SingularAttribute<Users, String> nombre;

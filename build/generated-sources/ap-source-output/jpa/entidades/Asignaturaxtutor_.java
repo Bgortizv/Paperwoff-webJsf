@@ -6,13 +6,13 @@ import javax.persistence.metamodel.StaticMetamodel;
 import jpa.entidades.Asignatura;
 import jpa.entidades.Tutores;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-13T23:26:02")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-27T20:30:37")
 @StaticMetamodel(Asignaturaxtutor.class)
 public class Asignaturaxtutor_ { 
 
     public static volatile SingularAttribute<Asignaturaxtutor, Boolean> estado;
+    public static volatile SingularAttribute<Asignaturaxtutor, Asignatura> asignatura;
     public static volatile SingularAttribute<Asignaturaxtutor, Long> idAxT;
-    public static volatile SingularAttribute<Asignaturaxtutor, Tutores> tutoresidTutores;
-    public static volatile SingularAttribute<Asignaturaxtutor, Asignatura> asignaturaidAsignatura;
+    public static volatile SingularAttribute<Asignaturaxtutor, Tutores> tutores;
 
 }

@@ -8,14 +8,14 @@ import javax.persistence.metamodel.StaticMetamodel;
 import jpa.entidades.DetalleFactura;
 import jpa.entidades.Tutores;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-13T23:26:02")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-27T20:30:37")
 @StaticMetamodel(Factura.class)
 public class Factura_ { 
 
     public static volatile SingularAttribute<Factura, Date> fecha;
     public static volatile CollectionAttribute<Factura, DetalleFactura> detalleFacturaCollection;
     public static volatile SingularAttribute<Factura, Integer> total;
-    public static volatile SingularAttribute<Factura, Tutores> tutoresidTutores;
+    public static volatile SingularAttribute<Factura, Tutores> tutores;
     public static volatile SingularAttribute<Factura, Long> idFactura;
     public static volatile SingularAttribute<Factura, Integer> totalhoras;
     public static volatile SingularAttribute<Factura, Date> fechaCreacion;
