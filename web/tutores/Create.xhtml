@@ -5,26 +5,25 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.CreateTutoresTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+    <body>
+        
+        <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+                    
+        <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateTutoresLabel_idTutores}" for="idTutores" />
-                    <h:inputText id="idTutores" value="#{tutoresController.selected.idTutores}" title="#{bundle.CreateTutoresTitle_idTutores}" required="true" requiredMessage="#{bundle.CreateTutoresRequiredMessage_idTutores}"/>
+                   
                     <h:outputLabel value="#{bundle.CreateTutoresLabel_fechaIngreso}" for="fechaIngreso" />
                     <h:inputText id="fechaIngreso" value="#{tutoresController.selected.fechaIngreso}" title="#{bundle.CreateTutoresTitle_fechaIngreso}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
                     <h:outputLabel value="#{bundle.CreateTutoresLabel_profesion}" for="profesion" />
                     <h:inputText id="profesion" value="#{tutoresController.selected.profesion}" title="#{bundle.CreateTutoresTitle_profesion}" />
-                    <h:outputLabel value="#{bundle.CreateTutoresLabel_usersidUser}" for="usersidUser" />
-                    <h:selectOneMenu id="usersidUser" value="#{tutoresController.selected.usersidUser}" title="#{bundle.CreateTutoresTitle_usersidUser}" required="true" requiredMessage="#{bundle.CreateTutoresRequiredMessage_usersidUser}">
+                    <h:outputLabel value="#{bundle.CreateTutoresLabel_nombre}" for="Nombre" />
+                    <h:selectOneMenu id="usersidUser" value="#{tutoresController.selected.users}" title="#{bundle.CreateTutoresTitle_usersidUser}" required="true" requiredMessage="#{bundle.CreateTutoresRequiredMessage_usersidUser}">
                         <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
@@ -39,5 +38,5 @@
             </h:form>
         </ui:define>
     </ui:composition>
-
+    </body>
 </html>

@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-   
+
     <body>
-        
+
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
-                    
-        <ui:define name="content">
-            
-            <h:panelGroup id="messagePanel" layout="block">
+
+            <ui:define name="content">
+    <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
@@ -42,18 +41,18 @@
                     <h:outputText value="#{tutoriasController.selected.cantidadHoras}" title="#{bundle.ViewTutoriasTitle_cantidadHoras}"/>
                     <h:outputText value="#{bundle.ViewTutoriasLabel_paga}"/>
                     <h:outputText value="#{tutoriasController.selected.paga}" title="#{bundle.ViewTutoriasTitle_paga}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_users}"/>
-                    <h:outputText value="#{tutoriasController.selected.users}" title="#{bundle.ViewTutoriasTitle_usersidUser}"/>
+                    <h:outputText value="#{bundle.ViewTutoriasLabel_usersidUser}"/>
+                    <h:outputText value="#{tutoriasController.selected.usersidUser}" title="#{bundle.ViewTutoriasTitle_usersidUser}"/>
                     <h:outputText value="#{bundle.ViewTutoriasLabel_tutoresidTutores}"/>
-                    <h:outputText value="#{tutoriasController.selected.tutores}" title="#{bundle.ViewTutoriasTitle_tutoresidTutores}"/>
+                    <h:outputText value="#{tutoriasController.selected.tutoresidTutores}" title="#{bundle.ViewTutoriasTitle_tutoresidTutores}"/>
                     <h:outputText value="#{bundle.ViewTutoriasLabel_asignaturaidAsignatura}"/>
-                    <h:outputText value="#{tutoriasController.selected.asignatura}" title="#{bundle.ViewTutoriasTitle_asignaturaidAsignatura}"/>
+                    <h:outputText value="#{tutoriasController.selected.asignaturaidAsignatura}" title="#{bundle.ViewTutoriasTitle_asignaturaidAsignatura}"/>
                     <h:outputText value="#{bundle.ViewTutoriasLabel_estudiantesidEstudiantes}"/>
-                    <h:outputText value="#{tutoriasController.selected.estudiantes}" title="#{bundle.ViewTutoriasTitle_estudiantesidEstudiantes}"/>
+                    <h:outputText value="#{tutoriasController.selected.estudiantesidEstudiantes}" title="#{bundle.ViewTutoriasTitle_estudiantesidEstudiantes}"/>
                     <h:outputText value="#{bundle.ViewTutoriasLabel_tipoClaseidTipoClase}"/>
-                    <h:outputText value="#{tutoriasController.selected.tipoClase}" title="#{bundle.ViewTutoriasTitle_tipoClaseidTipoClase}"/>
+                    <h:outputText value="#{tutoriasController.selected.tipoClaseidTipoClase}" title="#{bundle.ViewTutoriasTitle_tipoClaseidTipoClase}"/>
                     <h:outputText value="#{bundle.ViewTutoriasLabel_virPresidVirPres}"/>
-                    <h:outputText value="#{tutoriasController.selected.virpres}" title="#{bundle.ViewTutoriasTitle_virPresidVirPres}"/>
+                    <h:outputText value="#{tutoriasController.selected.virPresidVirPres}" title="#{bundle.ViewTutoriasTitle_virPresidVirPres}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{tutoriasController.destroyAndView}" value="#{bundle.ViewTutoriasDestroyLink}"/>
@@ -69,7 +68,13 @@
                 <h:link outcome="/index" value="#{bundle.ViewTutoriasIndexLink}"/>
 
             </h:form>
-        </ui:define>
-    </ui:composition>
-</body>
+                
+                
+                
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
 </html>
