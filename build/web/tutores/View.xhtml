@@ -5,11 +5,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ViewTutoresTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+<body>
+    <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+
+        <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -23,8 +22,8 @@
                     </h:outputText>
                     <h:outputText value="#{bundle.ViewTutoresLabel_profesion}"/>
                     <h:outputText value="#{tutoresController.selected.profesion}" title="#{bundle.ViewTutoresTitle_profesion}"/>
-                    <h:outputText value="#{bundle.ViewTutoresLabel_usersidUser}"/>
-                    <h:outputText value="#{tutoresController.selected.usersidUser}" title="#{bundle.ViewTutoresTitle_usersidUser}"/>
+                    <h:outputText value="#{bundle.ViewTutoresLabel_users}"/>
+                    <h:outputText value="#{tutoresController.selected.users}" title="#{bundle.ViewTutoresTitle_usersidUser}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{tutoresController.destroyAndView}" value="#{bundle.ViewTutoresDestroyLink}"/>
@@ -42,5 +41,5 @@
             </h:form>
         </ui:define>
     </ui:composition>
-
+</body>
 </html>
