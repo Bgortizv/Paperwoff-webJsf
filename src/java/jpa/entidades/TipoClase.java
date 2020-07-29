@@ -39,12 +39,12 @@ public class TipoClase implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Tipo_Clase")
+    @Column(name = "id_Tipo_Clase", nullable = false)
     private Long idTipoClase;
-    @Size(max = 10)
-    @Column(name = "Descripcion")
+ 
+    @Column(name = "Descripcion", length = 10)
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoClaseidTipoClase")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoClase")
     private Collection<Tutorias> tutoriasCollection;
 
     public TipoClase() {
@@ -101,7 +101,7 @@ public class TipoClase implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entidades.TipoClase[ idTipoClase=" + idTipoClase + " ]";
+        return "" + idTipoClase + " ";
     }
     
 }

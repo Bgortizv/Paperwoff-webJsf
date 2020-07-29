@@ -6,7 +6,12 @@ import jsf.util.PaginationHelper;
 import jpa.sessions.TutoriasFacade;
 
 import java.io.Serializable;
+import static java.util.Collections.list;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -28,8 +33,35 @@ public class TutoriasController implements Serializable {
     private jpa.sessions.TutoriasFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private  DonutModel donutModel;
+    
+    private List<Tutorias> ListaTutorias;
 
-    public TutoriasController() {
+    public List<Tutorias> getListaTutorias() {
+        ListaTutorias = ejbFacade.findAll();
+        return ListaTutorias;
+    }
+
+    public void setListaTutorias(List<Tutorias> ListaTutorias) {
+        this.ListaTutorias = ListaTutorias;
+    }
+    
+    
+    
+    
+
+    public DonutModel getDonutModel() {
+        return donutModel;
+    }
+
+    public void setDonutModel(DonutModel donutModel) {
+        this.donutModel = donutModel;
+    }
+
+     @PostConstruct
+    public void init() {
+        
+        createDonutModel();
     }
 
     public Tutorias getSelected() {
@@ -81,6 +113,7 @@ public class TutoriasController implements Serializable {
 
     public String create() {
         try {
+            System.out.println("usuario"+current);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TutoriasCreated"));
             return prepareCreate();
@@ -163,6 +196,31 @@ public class TutoriasController implements Serializable {
     private void recreateModel() {
         items = null;
     }
+    
+    public DonutModel initDonutModel (){
+        DonutModel model = new DonutModel();
+        Map<String, Number> circle = new LinkedHashMap<String, Number>();
+        circle.put("Homescholing", 30);
+        circle.put("Matemáticas", 30);
+        circle.put("Español para extranjeros", 20);
+        circle.put("Tutorías externas", 15);
+        circle.put("otros", 5);
+        System.out.println("circulo"+circle);
+        
+        model.setCirculo(circle);
+        
+        return model;
+        }
+    
+    public void createDonutModel(){
+        donutModel = initDonutModel();
+        donutModel.setTitle("Custom Options");
+        donutModel.setLegendPosition("e");
+        donutModel.setSliceMargin(5);
+        donutModel.setShowDataLabels(true);
+        donutModel.setDataFormat("value");
+        donutModel.setShadow(false);
+    }
 
     private void recreatePagination() {
         pagination = null;
@@ -192,44 +250,10 @@ public class TutoriasController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Tutorias.class)
-    public static class TutoriasControllerConverter implements Converter {
-
-        @Override
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-            if (value == null || value.length() == 0) {
-                return null;
-            }
-            TutoriasController controller = (TutoriasController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tutoriasController");
-            return controller.getTutorias(getKey(value));
-        }
-
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
-            return key;
-        }
-
-        String getStringKey(java.lang.Long value) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(value);
-            return sb.toString();
-        }
-
-        @Override
-        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-            if (object == null) {
-                return null;
-            }
-            if (object instanceof Tutorias) {
-                Tutorias o = (Tutorias) object;
-                return getStringKey(o.getIdTutorias());
-            } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Tutorias.class.getName());
-            }
-        }
-
-    }
-
+ 
+        
+    
 }
+
+
+   

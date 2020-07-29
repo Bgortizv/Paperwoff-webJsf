@@ -6,6 +6,7 @@ import jsf.util.PaginationHelper;
 import jpa.sessions.FacturaFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,7 +29,19 @@ public class FacturaController implements Serializable {
     private jpa.sessions.FacturaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+ 
+    private List<Factura> ListaFactura;
 
+    public List<Factura> getListaFactura() {
+      ListaFactura =   ejbFacade.findAll();
+        return ListaFactura;
+    }
+
+    public void setListaFactura(List<Factura> ListaFactura) {
+        this.ListaFactura = ListaFactura;
+    }
+    
+    
     public FacturaController() {
     }
 

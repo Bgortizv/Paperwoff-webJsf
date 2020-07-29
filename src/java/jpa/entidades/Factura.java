@@ -48,7 +48,7 @@ public class Factura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Factura")
+    @Column(name = "id_Factura", nullable = false)
     private Long idFactura;
     @Column(name = "Fecha")
     @Temporal(TemporalType.DATE)
@@ -66,11 +66,11 @@ public class Factura implements Serializable {
     private Date finPeriodo;
     @Column(name = "Total_horas")
     private Integer totalhoras;
-    @JoinColumn(name = "Tutores_id_Tutores", referencedColumnName = "id_Tutores")
-    @ManyToOne(optional = false)
-    private Tutores tutoresidTutores;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facturaidFactura")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
     private Collection<DetalleFactura> detalleFacturaCollection;
+    @JoinColumn(name = "Tutores_id_Tutores", referencedColumnName = "id_Tutores", nullable = false)
+    @ManyToOne(optional = false)
+    private Tutores tutores;
 
     public Factura() {
     }
@@ -135,14 +135,6 @@ public class Factura implements Serializable {
         this.totalhoras = totalhoras;
     }
 
-    public Tutores getTutoresidTutores() {
-        return tutoresidTutores;
-    }
-
-    public void setTutoresidTutores(Tutores tutoresidTutores) {
-        this.tutoresidTutores = tutoresidTutores;
-    }
-
     @XmlTransient
     public Collection<DetalleFactura> getDetalleFacturaCollection() {
         return detalleFacturaCollection;
@@ -150,6 +142,14 @@ public class Factura implements Serializable {
 
     public void setDetalleFacturaCollection(Collection<DetalleFactura> detalleFacturaCollection) {
         this.detalleFacturaCollection = detalleFacturaCollection;
+    }
+
+    public Tutores getTutores() {
+        return tutores;
+    }
+
+    public void setTutores(Tutores tutores) {
+        this.tutores = tutores;
     }
 
     @Override

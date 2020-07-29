@@ -40,18 +40,18 @@ public class Asignatura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Asignatura")
+    @Column(name = "id_Asignatura", nullable = false)
     private Long idAsignatura;
-    @Size(max = 30)
-    @Column(name = "Nombre_Asignatura")
+   
+    @Column(name = "Nombre_Asignatura", length = 30)
     private String nombreAsignatura;
     @Column(name = "C\u00f3digo")
     private Integer código;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignaturaidAsignatura")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignatura")
     private Collection<Asignaturaxtutor> asignaturaxtutorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignaturaidAsignatura")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignatura")
     private Collection<Tutorias> tutoriasCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignaturaidAsignatura")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignatura")
     private Collection<DetalleFactura> detalleFacturaCollection;
 
     public Asignatura() {
@@ -134,7 +134,7 @@ public class Asignatura implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entidades.Asignatura[ idAsignatura=" + idAsignatura + " ]";
+        return "" + idAsignatura + " ";
     }
     
 }

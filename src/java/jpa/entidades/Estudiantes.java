@@ -44,22 +44,22 @@ public class Estudiantes implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Estudiantes")
+    @Column(name = "id_Estudiantes", nullable = false)
     private Long idEstudiantes;
     @Column(name = "Grado")
     private Integer grado;
-    @Size(max = 30)
-    @Column(name = "Acudiente")
+ 
+    @Column(name = "Acudiente", length = 30)
     private String acudiente;
     @Column(name = "Celular_Acudiente")
     private BigInteger celularAcudiente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiantesidEstudiantes")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiantes")
     private Collection<Tutorias> tutoriasCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiantesidEstudiantes")
-    private Collection<BolsaPagos> bolsaPagosCollection;
-    @JoinColumn(name = "Users_id_user", referencedColumnName = "id_User")
+    @JoinColumn(name = "Users_id_user", referencedColumnName = "id_User", nullable = false)
     @ManyToOne(optional = false)
-    private Users usersiduser;
+    private Users users;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiantes")
+    private Collection<BolsaPagos> bolsaPagosCollection;
 
     public Estudiantes() {
     }
@@ -109,6 +109,14 @@ public class Estudiantes implements Serializable {
         this.tutoriasCollection = tutoriasCollection;
     }
 
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
     @XmlTransient
     public Collection<BolsaPagos> getBolsaPagosCollection() {
         return bolsaPagosCollection;
@@ -116,14 +124,6 @@ public class Estudiantes implements Serializable {
 
     public void setBolsaPagosCollection(Collection<BolsaPagos> bolsaPagosCollection) {
         this.bolsaPagosCollection = bolsaPagosCollection;
-    }
-
-    public Users getUsersiduser() {
-        return usersiduser;
-    }
-
-    public void setUsersiduser(Users usersiduser) {
-        this.usersiduser = usersiduser;
     }
 
     @Override
@@ -148,7 +148,7 @@ public class Estudiantes implements Serializable {
 
     @Override
     public String toString() {
-        return "" + usersiduser.getNombre() + "";
+        return  + idEstudiantes + " ";
     }
     
 }

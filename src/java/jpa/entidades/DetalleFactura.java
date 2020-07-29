@@ -37,18 +37,18 @@ public class DetalleFactura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Detalle_Factura")
+    @Column(name = "id_Detalle_Factura", nullable = false)
     private Long idDetalleFactura;
     @Column(name = "Cantidad_Horas")
     private Integer cantidadHoras;
     @Column(name = "Valor_Total")
     private Integer valorTotal;
-    @JoinColumn(name = "Asignatura_id_Asignatura", referencedColumnName = "id_Asignatura")
+    @JoinColumn(name = "Asignatura_id_Asignatura", referencedColumnName = "id_Asignatura", nullable = false)
     @ManyToOne(optional = false)
-    private Asignatura asignaturaidAsignatura;
-    @JoinColumn(name = "Factura_id_Factura", referencedColumnName = "id_Factura")
+    private Asignatura asignatura;
+    @JoinColumn(name = "Factura_id_Factura", referencedColumnName = "id_Factura", nullable = false)
     @ManyToOne(optional = false)
-    private Factura facturaidFactura;
+    private Factura factura;
 
     public DetalleFactura() {
     }
@@ -81,20 +81,20 @@ public class DetalleFactura implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public Asignatura getAsignaturaidAsignatura() {
-        return asignaturaidAsignatura;
+    public Asignatura getAsignatura() {
+        return asignatura;
     }
 
-    public void setAsignaturaidAsignatura(Asignatura asignaturaidAsignatura) {
-        this.asignaturaidAsignatura = asignaturaidAsignatura;
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
-    public Factura getFacturaidFactura() {
-        return facturaidFactura;
+    public Factura getFactura() {
+        return factura;
     }
 
-    public void setFacturaidFactura(Factura facturaidFactura) {
-        this.facturaidFactura = facturaidFactura;
+    public void setFactura(Factura factura) {
+        this.factura = factura;
     }
 
     @Override

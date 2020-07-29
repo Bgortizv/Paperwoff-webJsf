@@ -39,12 +39,12 @@ public class Virpres implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_VirPres")
+    @Column(name = "id_VirPres", nullable = false)
     private Long idVirPres;
-    @Size(max = 10)
-    @Column(name = "Descrip")
+  
+    @Column(name = "Descrip", length = 10)
     private String descrip;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "virPresidVirPres")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "virpres")
     private Collection<Tutorias> tutoriasCollection;
 
     public Virpres() {
@@ -101,7 +101,7 @@ public class Virpres implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entidades.Virpres[ idVirPres=" + idVirPres + " ]";
+        return "" + idVirPres + " ";
     }
     
 }

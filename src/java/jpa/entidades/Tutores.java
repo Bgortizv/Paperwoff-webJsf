@@ -45,25 +45,25 @@ public class Tutores implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Tutores")
+    @Column(name = "id_Tutores", nullable = false)
     private Long idTutores;
     @Column(name = "fecha_ingreso")
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
-    @Size(max = 30)
-    @Column(name = "profesion")
+
+    @Column(name = "profesion", length = 30)
     private String profesion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutoresidTutores")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutores")
     private Collection<Asignaturaxtutor> asignaturaxtutorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutoresidTutores")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutores")
     private Collection<Tutorias> tutoriasCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutoresidTutores")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutores")
     private Collection<Disponibilidad> disponibilidadCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutoresidTutores")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutores")
     private Collection<Factura> facturaCollection;
-    @JoinColumn(name = "Users_id_User", referencedColumnName = "id_User")
+    @JoinColumn(name = "Users_id_User", referencedColumnName = "id_User", nullable = false)
     @ManyToOne(optional = false)
-    private Users usersidUser;
+    private Users users;
 
     public Tutores() {
     }
@@ -132,12 +132,12 @@ public class Tutores implements Serializable {
         this.facturaCollection = facturaCollection;
     }
 
-    public Users getUsersidUser() {
-        return usersidUser;
+    public Users getUsers() {
+        return users;
     }
 
-    public void setUsersidUser(Users usersidUser) {
-        this.usersidUser = usersidUser;
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
     @Override
@@ -162,7 +162,7 @@ public class Tutores implements Serializable {
 
     @Override
     public String toString() {
-        return usersidUser.getNombre() + " " + usersidUser.getApellidos();
+        return "" + idTutores + " ";
     }
     
 }

@@ -47,7 +47,7 @@ public class Tutorias implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Tutorias")
+    @Column(name = "id_Tutorias", nullable = false)
     private Long idTutorias;
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
@@ -60,37 +60,37 @@ public class Tutorias implements Serializable {
     @Column(name = "Total")
     private Integer total;
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "Hora_inicio")
+   
+    @Column(name = "Hora_inicio", nullable = false)
     @Temporal(TemporalType.TIME)
     private Date horainicio;
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "Hora_fin")
+   
+    @Column(name = "Hora_fin", nullable = false)
     @Temporal(TemporalType.TIME)
     private Date horafin;
     @Column(name = "Cantidad_Horas")
     private Integer cantidadHoras;
     @Column(name = "Paga")
     private Boolean paga;
-    @JoinColumn(name = "Users_id_User", referencedColumnName = "id_User")
+    @JoinColumn(name = "Users_id_User", referencedColumnName = "id_User", nullable = false)
     @ManyToOne(optional = false)
-    private Users usersidUser;
-    @JoinColumn(name = "Tutores_id_Tutores", referencedColumnName = "id_Tutores")
+    private Users users;
+    @JoinColumn(name = "Tutores_id_Tutores", referencedColumnName = "id_Tutores", nullable = false)
     @ManyToOne(optional = false)
-    private Tutores tutoresidTutores;
-    @JoinColumn(name = "Asignatura_id_Asignatura", referencedColumnName = "id_Asignatura")
+    private Tutores tutores;
+    @JoinColumn(name = "Asignatura_id_Asignatura", referencedColumnName = "id_Asignatura", nullable = false)
     @ManyToOne(optional = false)
-    private Asignatura asignaturaidAsignatura;
-    @JoinColumn(name = "Estudiantes_id_Estudiantes", referencedColumnName = "id_Estudiantes")
+    private Asignatura asignatura;
+    @JoinColumn(name = "Estudiantes_id_Estudiantes", referencedColumnName = "id_Estudiantes", nullable = false)
     @ManyToOne(optional = false)
-    private Estudiantes estudiantesidEstudiantes;
-    @JoinColumn(name = "Tipo_Clase_id_Tipo_Clase", referencedColumnName = "id_Tipo_Clase")
+    private Estudiantes estudiantes;
+    @JoinColumn(name = "Tipo_Clase_id_Tipo_Clase", referencedColumnName = "id_Tipo_Clase", nullable = false)
     @ManyToOne(optional = false)
-    private TipoClase tipoClaseidTipoClase;
-    @JoinColumn(name = "VirPres_id_VirPres", referencedColumnName = "id_VirPres")
+    private TipoClase tipoClase;
+    @JoinColumn(name = "VirPres_id_VirPres", referencedColumnName = "id_VirPres", nullable = false)
     @ManyToOne(optional = false)
-    private Virpres virPresidVirPres;
+    private Virpres virpres;
 
     public Tutorias() {
     }
@@ -177,52 +177,52 @@ public class Tutorias implements Serializable {
         this.paga = paga;
     }
 
-    public Users getUsersidUser() {
-        return usersidUser;
+    public Users getUsers() {
+        return users;
     }
 
-    public void setUsersidUser(Users usersidUser) {
-        this.usersidUser = usersidUser;
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
-    public Tutores getTutoresidTutores() {
-        return tutoresidTutores;
+    public Tutores getTutores() {
+        return tutores;
     }
 
-    public void setTutoresidTutores(Tutores tutoresidTutores) {
-        this.tutoresidTutores = tutoresidTutores;
+    public void setTutores(Tutores tutores) {
+        this.tutores = tutores;
     }
 
-    public Asignatura getAsignaturaidAsignatura() {
-        return asignaturaidAsignatura;
+    public Asignatura getAsignatura() {
+        return asignatura;
     }
 
-    public void setAsignaturaidAsignatura(Asignatura asignaturaidAsignatura) {
-        this.asignaturaidAsignatura = asignaturaidAsignatura;
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
-    public Estudiantes getEstudiantesidEstudiantes() {
-        return estudiantesidEstudiantes;
+    public Estudiantes getEstudiantes() {
+        return estudiantes;
     }
 
-    public void setEstudiantesidEstudiantes(Estudiantes estudiantesidEstudiantes) {
-        this.estudiantesidEstudiantes = estudiantesidEstudiantes;
+    public void setEstudiantes(Estudiantes estudiantes) {
+        this.estudiantes = estudiantes;
     }
 
-    public TipoClase getTipoClaseidTipoClase() {
-        return tipoClaseidTipoClase;
+    public TipoClase getTipoClase() {
+        return tipoClase;
     }
 
-    public void setTipoClaseidTipoClase(TipoClase tipoClaseidTipoClase) {
-        this.tipoClaseidTipoClase = tipoClaseidTipoClase;
+    public void setTipoClase(TipoClase tipoClase) {
+        this.tipoClase = tipoClase;
     }
 
-    public Virpres getVirPresidVirPres() {
-        return virPresidVirPres;
+    public Virpres getVirpres() {
+        return virpres;
     }
 
-    public void setVirPresidVirPres(Virpres virPresidVirPres) {
-        this.virPresidVirPres = virPresidVirPres;
+    public void setVirpres(Virpres virpres) {
+        this.virpres = virpres;
     }
 
     @Override

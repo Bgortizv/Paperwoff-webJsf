@@ -41,7 +41,7 @@ public class Disponibilidad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Disponibilidad")
+    @Column(name = "id_Disponibilidad", nullable = false)
     private Long idDisponibilidad;
     @Column(name = "Fecha")
     @Temporal(TemporalType.DATE)
@@ -52,9 +52,9 @@ public class Disponibilidad implements Serializable {
     @Column(name = "Hora_fin")
     @Temporal(TemporalType.TIME)
     private Date horafin;
-    @JoinColumn(name = "Tutores_id_Tutores", referencedColumnName = "id_Tutores")
+    @JoinColumn(name = "Tutores_id_Tutores", referencedColumnName = "id_Tutores", nullable = false)
     @ManyToOne(optional = false)
-    private Tutores tutoresidTutores;
+    private Tutores tutores;
 
     public Disponibilidad() {
     }
@@ -95,12 +95,12 @@ public class Disponibilidad implements Serializable {
         this.horafin = horafin;
     }
 
-    public Tutores getTutoresidTutores() {
-        return tutoresidTutores;
+    public Tutores getTutores() {
+        return tutores;
     }
 
-    public void setTutoresidTutores(Tutores tutoresidTutores) {
-        this.tutoresidTutores = tutoresidTutores;
+    public void setTutores(Tutores tutores) {
+        this.tutores = tutores;
     }
 
     @Override

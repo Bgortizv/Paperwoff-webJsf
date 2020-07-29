@@ -6,11 +6,13 @@ import jsf.util.PaginationHelper;
 import jpa.sessions.UsersFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -18,6 +20,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import static org.primefaces.component.menuitem.UIMenuItemBase.PropertyKeys.url;
 
 @Named("usersController")
 @SessionScoped
@@ -25,11 +28,74 @@ public class UsersController implements Serializable {
 
     private Users current;
     private Users prueba;
+    private Users InicioSes;
     private DataModel items = null;
     @EJB
     private jpa.sessions.UsersFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+
+    public Users getInicioSes() {
+        return InicioSes;
+    }
+
+    public void setInicioSes(Users InicioSes) {
+        this.InicioSes = InicioSes;
+    }
+    
+    public String validar(){
+    Users us = new Users() ;
+    Users uscontra = new Users();
+    String url = null;
+    
+        try{
+    System.out.println("objeto " + InicioSes);
+    String documento = InicioSes.getDocumento().toString();
+String pass  = InicioSes.getPassword();
+    us= ejbFacade.ValidarUsuario(InicioSes);
+        //System.out.println("objeto 1" + us);
+
+        System.out.println("objeto 2" + us);
+        if (us!=null) {
+             uscontra= ejbFacade.ValidarContrasenia(documento,pass );
+             
+               if(uscontra!=null) {
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("NombreUsuario", InicioSes.getNombre());
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserDocumento", InicioSes.getDocumento());
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserId", InicioSes.getIdUser());
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Contrasenia", InicioSes.getPassword());
+               url="/faces/Dashboard.xhtml?faces-redirect=true";
+                } else {
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "La contraseña es incorrecta", "");
+                FacesContext.getCurrentInstance().addMessage(null, fm);
+             }      
+        }else{
+         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "usuario no existe", "");
+                FacesContext.getCurrentInstance().addMessage(null, fm);
+        
+        }
+    } catch (Exception e){
+        FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Contraseña incorrecta ", "datos incorrectos"));
+       
+        
+    }
+    
+    return url;
+    }
+    
+    private List<Users> ListaUsers;
+
+    public List<Users> getListaUsers() {
+        ListaUsers = ejbFacade.findAll();
+        return ListaUsers;
+    }
+
+    public void setListaUsers(List<Users> ListaUsers) {
+        this.ListaUsers = ListaUsers;
+    }
 
     public UsersController() {
     }
@@ -37,6 +103,7 @@ public class UsersController implements Serializable {
     @PostConstruct
     public void init() {
     prueba = new Users();
+    InicioSes = new Users();
     }
     public Users getSelected() {
         if (current == null) {
@@ -91,6 +158,12 @@ public class UsersController implements Serializable {
     public String prepareCreate() {
         current = new Users();
         selectedItemIndex = -1;
+        return "Create";
+    }
+    
+     public String ValidaInicioSes() {
+       
+       
         return "Create";
     }
 
@@ -218,44 +291,6 @@ public class UsersController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Users.class)
-    public static class UsersControllerConverter implements Converter {
 
-        @Override
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-            if (value == null || value.length() == 0) {
-                return null;
-            }
-            UsersController controller = (UsersController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "usersController");
-            return controller.getUsers(getKey(value));
-        }
-
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
-            return key;
-        }
-
-        String getStringKey(java.lang.Long value) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(value);
-            return sb.toString();
-        }
-
-        @Override
-        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-            if (object == null) {
-                return null;
-            }
-            if (object instanceof Users) {
-                Users o = (Users) object;
-                return getStringKey(o.getIdUser());
-            } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Users.class.getName());
-            }
-        }
-
-    }
 
 }

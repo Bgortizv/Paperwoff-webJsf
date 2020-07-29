@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -41,50 +43,49 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByEstado", query = "SELECT u FROM Users u WHERE u.estado = :estado")
     , @NamedQuery(name = "Users.findByDireccion", query = "SELECT u FROM Users u WHERE u.direccion = :direccion")
     , @NamedQuery(name = "Users.findByCargo", query = "SELECT u FROM Users u WHERE u.cargo = :cargo")
-    , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findByRole", query = "SELECT u FROM Users u WHERE u.role = :role")})
+    , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_User")
+    @Column(name = "id_User", nullable = false)
     private Long idUser;
     @Column(name = "Documento")
     private BigInteger documento;
-    
-    @Column(name = "Nombre")
+   
+    @Column(name = "Nombre", length = 20)
     private String nombre;
-    
-    @Column(name = "Apellidos")
+
+    @Column(name = "Apellidos", length = 20)
     private String apellidos;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    
-    @Column(name = "e_mail")
+ 
+    @Column(name = "e_mail", length = 30)
     private String eMail;
     @Column(name = "Celular")
     private BigInteger celular;
     @Column(name = "Estado")
     private Boolean estado;
-    
-    @Column(name = "Direccion")
+   
+    @Column(name = "Direccion", length = 30)
     private String direccion;
-    
-    @Column(name = "Cargo")
+
+    @Column(name = "Cargo", length = 30)
     private String cargo;
-    
-    @Column(name = "Password")
+ 
+    @Column(name = "Password", length = 512)
     private String password;
-    
-    @Column(name = "Role")
-    private String role;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersidUser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<Tutorias> tutoriasCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersidUser")
-    private Collection<Tutores> tutoresCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersiduser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<Estudiantes> estudiantesCollection;
+    @JoinColumn(name = "Role_id_role", referencedColumnName = "id_Role", nullable = false)
+    @ManyToOne(optional = false)
+    private Roles roles;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    private Collection<Tutores> tutoresCollection;
 
     public Users() {
     }
@@ -173,14 +174,6 @@ public class Users implements Serializable {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     @XmlTransient
     public Collection<Tutorias> getTutoriasCollection() {
         return tutoriasCollection;
@@ -191,21 +184,29 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Tutores> getTutoresCollection() {
-        return tutoresCollection;
-    }
-
-    public void setTutoresCollection(Collection<Tutores> tutoresCollection) {
-        this.tutoresCollection = tutoresCollection;
-    }
-
-    @XmlTransient
     public Collection<Estudiantes> getEstudiantesCollection() {
         return estudiantesCollection;
     }
 
     public void setEstudiantesCollection(Collection<Estudiantes> estudiantesCollection) {
         this.estudiantesCollection = estudiantesCollection;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
+    }
+
+    @XmlTransient
+    public Collection<Tutores> getTutoresCollection() {
+        return tutoresCollection;
+    }
+
+    public void setTutoresCollection(Collection<Tutores> tutoresCollection) {
+        this.tutoresCollection = tutoresCollection;
     }
 
     @Override
@@ -230,7 +231,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "" + nombre + " " + apellidos;
+        return "" + idUser + "";
     }
     
 }

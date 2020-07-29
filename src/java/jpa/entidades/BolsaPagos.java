@@ -38,15 +38,15 @@ public class BolsaPagos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Bolsa_Pagos")
+    @Column(name = "id_Bolsa_Pagos", nullable = false)
     private Long idBolsaPagos;
     @Column(name = "Total_Abonos")
     private BigInteger totalAbonos;
     @Column(name = "Total_Descuentos")
     private BigInteger totalDescuentos;
-    @JoinColumn(name = "Estudiantes_id_Estudiantes", referencedColumnName = "id_Estudiantes")
+    @JoinColumn(name = "Estudiantes_id_Estudiantes", referencedColumnName = "id_Estudiantes", nullable = false)
     @ManyToOne(optional = false)
-    private Estudiantes estudiantesidEstudiantes;
+    private Estudiantes estudiantes;
 
     public BolsaPagos() {
     }
@@ -79,12 +79,12 @@ public class BolsaPagos implements Serializable {
         this.totalDescuentos = totalDescuentos;
     }
 
-    public Estudiantes getEstudiantesidEstudiantes() {
-        return estudiantesidEstudiantes;
+    public Estudiantes getEstudiantes() {
+        return estudiantes;
     }
 
-    public void setEstudiantesidEstudiantes(Estudiantes estudiantesidEstudiantes) {
-        this.estudiantesidEstudiantes = estudiantesidEstudiantes;
+    public void setEstudiantes(Estudiantes estudiantes) {
+        this.estudiantes = estudiantes;
     }
 
     @Override

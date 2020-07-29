@@ -36,16 +36,16 @@ public class Asignaturaxtutor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_AxT")
+    @Column(name = "id_AxT", nullable = false)
     private Long idAxT;
     @Column(name = "Estado")
     private Boolean estado;
-    @JoinColumn(name = "Tutores_id_Tutores", referencedColumnName = "id_Tutores")
+    @JoinColumn(name = "Tutores_id_Tutores", referencedColumnName = "id_Tutores", nullable = false)
     @ManyToOne(optional = false)
-    private Tutores tutoresidTutores;
-    @JoinColumn(name = "Asignatura_id_Asignatura", referencedColumnName = "id_Asignatura")
+    private Tutores tutores;
+    @JoinColumn(name = "Asignatura_id_Asignatura", referencedColumnName = "id_Asignatura", nullable = false)
     @ManyToOne(optional = false)
-    private Asignatura asignaturaidAsignatura;
+    private Asignatura asignatura;
 
     public Asignaturaxtutor() {
     }
@@ -70,20 +70,20 @@ public class Asignaturaxtutor implements Serializable {
         this.estado = estado;
     }
 
-    public Tutores getTutoresidTutores() {
-        return tutoresidTutores;
+    public Tutores getTutores() {
+        return tutores;
     }
 
-    public void setTutoresidTutores(Tutores tutoresidTutores) {
-        this.tutoresidTutores = tutoresidTutores;
+    public void setTutores(Tutores tutores) {
+        this.tutores = tutores;
     }
 
-    public Asignatura getAsignaturaidAsignatura() {
-        return asignaturaidAsignatura;
+    public Asignatura getAsignatura() {
+        return asignatura;
     }
 
-    public void setAsignaturaidAsignatura(Asignatura asignaturaidAsignatura) {
-        this.asignaturaidAsignatura = asignaturaidAsignatura;
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
     @Override

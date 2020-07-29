@@ -5,18 +5,17 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.CreateFacturaTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+    <body>
+        
+        <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+                    
+        <ui:define name="content">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateFacturaLabel_idFactura}" for="idFactura" />
-                    <h:inputText id="idFactura" value="#{facturaController.selected.idFactura}" title="#{bundle.CreateFacturaTitle_idFactura}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_idFactura}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateFacturaLabel_fecha}" for="fecha" />
                     <h:inputText id="fecha" value="#{facturaController.selected.fecha}" title="#{bundle.CreateFacturaTitle_fecha}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -38,7 +37,7 @@
                     <h:outputLabel value="#{bundle.CreateFacturaLabel_totalhoras}" for="totalhoras" />
                     <h:inputText id="totalhoras" value="#{facturaController.selected.totalhoras}" title="#{bundle.CreateFacturaTitle_totalhoras}" />
                     <h:outputLabel value="#{bundle.CreateFacturaLabel_tutoresidTutores}" for="tutoresidTutores" />
-                    <h:selectOneMenu id="tutoresidTutores" value="#{facturaController.selected.tutoresidTutores}" title="#{bundle.CreateFacturaTitle_tutoresidTutores}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_tutoresidTutores}">
+                    <h:selectOneMenu id="tutoresidTutores" value="#{facturaController.selected.tutores}" title="#{bundle.CreateFacturaTitle_tutoresidTutores}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_tutoresidTutores}">
                         <f:selectItems value="#{tutoresController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
@@ -53,5 +52,5 @@
             </h:form>
         </ui:define>
     </ui:composition>
-
+    </body>
 </html>
