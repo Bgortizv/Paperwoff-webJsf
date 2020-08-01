@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
         
@@ -35,14 +36,14 @@
                         <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
                             <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
                                 
-                                <h:dataTable value="#{facturaController.listaFactura}" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline" var="factura" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
-                        <h:column>
+                                <p:dataTable id="factura" value="#{facturaController.listaFactura}" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline" var="factura" style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Documento"/>
                             </f:facet>
                             <h:outputText value="#{factura.tutores.users.documento}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Tutor"/>
                             </f:facet>
@@ -51,35 +52,35 @@
                                 <h:outputText value="#{factura.tutores.users.apellidos}">
                                 </h:outputText>
                      
-                        </h:column>
-                           <h:column>
+                        </p:column>
+                           <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Total horas"/>
                             </f:facet>
                             <h:outputText value="#{factura.totalhoras}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="# Factura"/>
                             </f:facet>
                             <h:outputText value="#{factura.idFactura}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListFacturaTitle_fechaCreacion}"/>
                             </f:facet>
                             <h:outputText value="#{factura.fechaCreacion}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
-                        </h:column>
+                        </p:column>
                                               
-                        <h:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Total"/>
                             </f:facet>
                             <h:outputText value="#{factura.total}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
@@ -88,8 +89,8 @@
                             <h:commandLink action="#{facturaController.prepareEdit}" value="#{bundle.ListFacturaEditLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{facturaController.destroy}" value="#{bundle.ListFacturaDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                        </p:column>
+                    </p:dataTable>
                  </div>
                     </div>
                 </div>
@@ -101,7 +102,13 @@
                 <h:commandLink action="#{facturaController.prepareCreate}" value="#{bundle.ListFacturaCreateLink}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundle.ListFacturaIndexLink}"/>
+                <div style="float:right;padding-top: 5px;">
+                 <h:commandLink>
+                    <p:graphicImage name="/images/excel.png" width="24"/>
+                    <p:dataExporter type="xls" target="factura" fileName="Facturas" pageOnly="true" />
+                </h:commandLink>
+                </div>
+                <!--<h:link outcome="/index" value="#{bundle.ListFacturaIndexLink}"/>-->
             </h:form>
         </ui:define>
     </ui:composition>

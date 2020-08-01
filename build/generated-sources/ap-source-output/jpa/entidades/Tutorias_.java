@@ -11,7 +11,7 @@ import jpa.entidades.Tutores;
 import jpa.entidades.Users;
 import jpa.entidades.Virpres;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-07-27T20:30:37")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-08-01T13:39:56")
 @StaticMetamodel(Tutorias.class)
 public class Tutorias_ { 
 
