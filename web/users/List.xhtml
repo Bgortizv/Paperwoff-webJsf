@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
         
@@ -31,74 +32,74 @@
                         <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
                             <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
                     
-                    <h:dataTable value="#{usersController.items}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline"  border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
-                        <h:column>
+                                <p:dataTable id="Users" value="#{usersController.items}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline"   style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_idUser}"/>
                             </f:facet>
                             <h:outputText value="#{item.idUser}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_documento}"/>
                             </f:facet>
                             <h:outputText value="#{item.documento}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_nombre}"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_apellidos}"/>
                             </f:facet>
                             <h:outputText value="#{item.apellidos}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_EMail}"/>
                             </f:facet>
                             <h:outputText value="#{item.EMail}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_celular}"/>
                             </f:facet>
                             <h:outputText value="#{item.celular}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_estado}"/>
                             </f:facet>
                             <h:outputText value="#{item.estado}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_direccion}"/>
                             </f:facet>
                             <h:outputText value="#{item.direccion}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_cargo}"/>
                             </f:facet>
                             <h:outputText value="#{item.cargo}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_password}"/>
                             </f:facet>
                             <h:outputText value="#{item.password}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_role}"/>
                             </f:facet>
                             <h:outputText value="#{item.roles}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
@@ -107,8 +108,8 @@
                             <h:commandLink action="#{usersController.prepareEdit}" value="#{bundle.ListUsersEditLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{usersController.destroy}" value="#{bundle.ListUsersDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                        </p:column>
+                    </p:dataTable>
                             </div>
                         </div>
                     </div>
@@ -120,6 +121,12 @@
                 <h:commandLink action="#{usersController.prepareCreate}" value="#{bundle.ListUsersCreateLink}"/>
                 <br />
                 <br />
+                <div style="float:right;padding-top: 5px;">
+                 <h:commandLink>
+                    <p:graphicImage name="/images/excel.png" width="24"/>
+                    <p:dataExporter type="xls" target="Users" fileName="Usuarios" pageOnly="true" />
+                </h:commandLink>
+                </div>
                 <h:link outcome="/index" value="#{bundle.ListUsersIndexLink}"/>
             </h:form>
         </ui:define>

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
         
@@ -26,34 +27,34 @@
                             <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
                                 
                     
-                    <h:dataTable value="#{tutoresController.items}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
-                        <h:column>
+                    <p:dataTable id="tutores" value="#{tutoresController.items}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline"  style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTutoresTitle_idTutores}"/>
                             </f:facet>
                             <h:outputText value="#{item.idTutores}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTutoresTitle_fechaIngreso}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaIngreso}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTutoresTitle_profesion}"/>
                             </f:facet>
                             <h:outputText value="#{item.profesion}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTutoresTitle_users}"/>
                             </f:facet>
                             <h:outputText value="#{item.users}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
@@ -62,8 +63,8 @@
                             <h:commandLink action="#{tutoresController.prepareEdit}" value="#{bundle.ListTutoresEditLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{tutoresController.destroy}" value="#{bundle.ListTutoresDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                        </p:column>
+                    </p:dataTable>
                             </div>
                             </div>
                         </div>
@@ -74,6 +75,12 @@
                 <h:commandLink action="#{tutoresController.prepareCreate}" value="#{bundle.ListTutoresCreateLink}"/>
                 <br />
                 <br />
+                <div style="float:right;padding-top: 5px;">
+                 <h:commandLink>
+                    <p:graphicImage name="/images/excel.png" width="24"/>
+                    <p:dataExporter type="xls" target="tutores" fileName="Tutores" pageOnly="true" />
+                </h:commandLink>
+                </div>
                 <h:link outcome="/index" value="#{bundle.ListTutoresIndexLink}"/>
             </h:form>
         </ui:define>
