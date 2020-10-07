@@ -6,6 +6,7 @@ import jsf.util.PaginationHelper;
 import jpa.sessions.TutoresFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,6 +29,14 @@ public class TutoresController implements Serializable {
     private jpa.sessions.TutoresFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Tutores tutores;
+    
+    public List<Tutores> listarTutores() {
+        System.out.println(""+ejbFacade.findAll());  
+        return ejbFacade.findAll();
+          
+    }
+    
 
     public TutoresController() {
     }

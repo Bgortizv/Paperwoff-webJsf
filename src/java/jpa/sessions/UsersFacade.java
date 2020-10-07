@@ -33,6 +33,15 @@ public class UsersFacade extends AbstractFacade<Users> {
         super(Users.class);
     }
     
+    public Users encontrarUsuarioxLogin(String Documento){
+    Query q=em.createNamedQuery("Users.findByDocumento",Users.class).setParameter("documento", Documento);
+    List<Users> listado=q.getResultList();
+    
+    if(!listado.isEmpty()){
+    return listado.get(0);
+    }
+    return null;
+    }
     
     public Users consultaN(String nombre){
     Users retorno = new Users();
@@ -84,4 +93,14 @@ public class UsersFacade extends AbstractFacade<Users> {
     }
     return contrasenia;
     }
+    
+    public  List<Object> obtenerCorreos(){
+  Query q = em.createNativeQuery(" SELECT  e_mail From tyt.Users ");
+  
+        System.out.println("lista query "+q.getResultList());
+  List<Object> correos=(List<Object> )q.getResultList();
+        System.out.println("lista correos "+correos);
+  return correos;
+  }
+    
 }

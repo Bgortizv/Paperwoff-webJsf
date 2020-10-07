@@ -26,6 +26,9 @@
                     <h:outputText value="#{usersController.pagination.pageFirstItem + 1}..#{usersController.pagination.pageLastItem + 1}/#{usersController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{usersController.previous}" value="#{bundle.Previous} #{usersController.pagination.pageSize}" rendered="#{usersController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{usersController.next}" value="#{bundle.Next} #{usersController.pagination.pageSize}" rendered="#{usersController.pagination.hasNextPage}"/>&nbsp;
+                    <br/>
+                    <h:commandButton action="/users/Envio.xhtml" value="Masivos"/>
+                        <br/>
             <div class="row">            
                 <div class="col-sm-12">
                     <div class="card-box table-responsive">

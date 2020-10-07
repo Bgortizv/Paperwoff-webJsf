@@ -3,14 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
    <body>
         
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
                     
-        <ui:define name="content">
-            <h:form styleClass="jsfcrud_list_form">
+       <ui:define name="content">
+            <h:form styleClass="jsfcrud_list_form" enctype="multipart/form-data">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -19,45 +20,48 @@
                     <h:outputText value="#{disponibilidadController.pagination.pageFirstItem + 1}..#{disponibilidadController.pagination.pageLastItem + 1}/#{disponibilidadController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{disponibilidadController.previous}" value="#{bundle.Previous} #{disponibilidadController.pagination.pageSize}" rendered="#{disponibilidadController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{disponibilidadController.next}" value="#{bundle.Next} #{disponibilidadController.pagination.pageSize}" rendered="#{disponibilidadController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{disponibilidadController.listadisponibles}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDisponibilidadTitle_idDisponibilidad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idDisponibilidad}"/>
-                        </h:column>
-                        <h:column>
+            
+            
+            <div class="row">            
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                            <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
+            
+                    
+                    <p:dataTable id="tbl" value="#{disponibilidadController.listadisponibles}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline Color"  style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDisponibilidadTitle_fecha}"/>
                             </f:facet>
                             <h:outputText value="#{item.fecha}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDisponibilidadTitle_horainicio}"/>
                             </f:facet>
                             <h:outputText value="#{item.horainicio}">
                                 <f:convertDateTime pattern="HH:mm:ss" />
                             </h:outputText>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDisponibilidadTitle_horafin}"/>
                             </f:facet>
                             <h:outputText value="#{item.horafin}">
                                 <f:convertDateTime pattern="HH:mm:ss" />
                             </h:outputText>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDisponibilidadTitle_tutoresidTutores}"/>
                             </f:facet>
-                            <h:outputText value="#{item.tutoresidTutores.usersidUser.nombre}" /> &nbsp;
-                            <h:outputText value="#{item.tutoresidTutores.usersidUser.apellidos}"/>
-                        </h:column>
-                        <h:column>
+                            <h:outputText value="#{item.tutores.users.nombre}" /> &nbsp;
+                            <h:outputText value="#{item.tutores.users.apellidos}"/>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
@@ -66,9 +70,15 @@
                             <h:commandLink action="#{disponibilidadController.prepareEdit}" value="#{bundle.ListDisponibilidadEditLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{disponibilidadController.destroy}" value="#{bundle.ListDisponibilidadDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
+                        </p:column>
+                    </p:dataTable>
+                               
+                                </div>                   
+                            </div>
+                        </div>
+                    </div>
+                 </div> 
+               </h:panelGroup>
                 <br />
                 <h:commandLink action="#{disponibilidadController.prepareCreate}" value="#{bundle.ListDisponibilidadCreateLink}"/>
                 <br />

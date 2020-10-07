@@ -2,6 +2,36 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/tutorias/EnvioCorreos%20Masivos.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jpa/sessions/DisponibilidadFacade.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/factura/VistaTutoresList.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/tutorias/Prueba.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jpa/sessions/FacturaFacade.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/index.html</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jsf/UsersController.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jsf/DisponibilidadController.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/template.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/factura/List.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jpa/sessions/TutoriasFacade.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/Pagina%20Maestra/TemplateTutores.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jsf/TutoriasController.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/tutorias/VistaTutoresList.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/tutorias/Envio.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/Pagina%20Maestra/newTemplate.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/clasesEspeciales/CorreosTutorias.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/tutorias/List.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jpa/entidades/Tutorias.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jsf/FacturaController.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/clasesEspeciales/Correo.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/index.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jpa/entidades/Users.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/jpa/sessions/UsersFacade.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/clasesEspeciales/MailSender.java</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/disponibilidad/VistaTutoresDisponibilidad.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/web/Inicio_Sesion.xhtml</file>
+            <file>file:/C:/Users/Gus/Documents/NetBeansProjects/Paperwoff/src/java/clasesEspeciales/CorreosMasivos.java</file>
+        </group>
     </open-files>
 </project-private>

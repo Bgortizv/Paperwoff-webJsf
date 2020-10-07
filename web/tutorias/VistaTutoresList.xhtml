@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        
+        <link href="../resources/Bottsrtap4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/EstilosMakiaDos.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+<body class="Color">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../Pagina Maestra/TemplateTutores.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+     <ui:define name="content">
+    <h:form styleClass="jsfcrud_list_form" enctype="multipart/form-data">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTutoriasEmpty}" rendered="#{tutoriasController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tutoriasController.items.rowCount > 0}">
+                    <h:outputText value="#{tutoriasController.pagination.pageFirstItem + 1}..#{tutoriasController.pagination.pageLastItem + 1}/#{tutoriasController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tutoriasController.previous}" value="#{bundle.Previous} #{tutoriasController.pagination.pageSize}" rendered="#{tutoriasController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tutoriasController.next}" value="#{bundle.Next} #{tutoriasController.pagination.pageSize}" rendered="#{tutoriasController.pagination.hasNextPage}"/>&nbsp;
+                     <div class="row"> 
+                        <div class="col-xs-5 col-md-5">
+                       
+                        <a href="http://localhost:22947/Reportesfinal/RepoPDF.jsp" target="black">       
+                         <img src="../resources/images/DiagramaTorta.jpg" />
+                        </a>
+                        <br/>
+                        <h:outputText value="#{tutoriasController.mensaje}"/>
+                        </div> 
+                        <br/>
+                    </div> 
+            <div class="row">            
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                            <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
+                                
+                                
+                                
+                                <!--<h:panelGrid columnClasses="value">
+                        <p:schedule id="schedule" value="#{tutoriasController.listaTutorias}"  widgetVar="item" >
+ 
+                            <p:ajax event="dateSelect" listener="#{tutoriasController.listaTutorias}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+            <p:ajax event="eventSelect" listener="#{tutoriasController.listaTutorias}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+          
+ 
+        </p:schedule>
+    </h:panelGrid>-->
+                                <p:dataTable id="tbl" value="#{tutoriasController.listaTutorias2}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline Color"  style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
+                    <p:column class="table-striped ">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTutoriasTitle_idTutorias}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[0]}"/>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTutoriasTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[1]}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column class="table-striped Color">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTutoriasTitle_creacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[2]}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTutoriasTitle_transporte}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[9]}"/>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTutoriasTitle_total}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[10]}"/>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="Hora Inicio"/>
+                            </f:facet>
+                            <h:outputText value="#{item[11]}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="Hora Fin"/>
+                            </f:facet>
+                            <h:outputText value="#{item[12]}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="Cant. Horas"/>
+                            </f:facet>
+                            <h:outputText value="#{item[13]}"/>
+                        </p:column>
+                        
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="Tutor"/>
+                            </f:facet>
+                            <h:outputText value="#{item[17]}"/>&nbsp;
+                            <h:outputText value="#{item[18]}"/>&nbsp;
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="Asignatura"/>
+                            </f:facet>
+                            <h:outputText value="#{item[5]}"/>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="Estudiante"/>
+                            </f:facet>
+                            <h:outputText value="#{item[6]}"/>&nbsp;
+                            <h:outputText value="#{item[6]}"/>&nbsp;
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="Tipo de Clase"/>
+                            </f:facet>
+                            <h:outputText value="#{item[7]}"/>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="Virtual/Presencial"/>
+                            </f:facet>
+                            <h:outputText value="#{item[8]}"/>
+                        </p:column>
+                        <p:column class="table-striped">
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tutoriasController.prepareView}" value="#{bundle.ListTutoriasViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tutoriasController.prepareEdit}" value="#{bundle.ListTutoriasEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tutoriasController.destroy}" value="#{bundle.ListTutoriasDestroyLink}"/>
+                        </p:column>
+                    </p:dataTable> 
+                                
+                                </div>                   
+                             </div>
+                        </div>
+                    </div>
+                 </div>
+                </h:panelGroup>
+               
+                <br />
+                <div style="float:right;padding-top: 5px;">
+                 <h:commandLink>
+                    <p:graphicImage name="/images/excel.png" width="24"/>
+                    <p:dataExporter type="xls" target="tbl" fileName="Tutorias" pageOnly="true" />
+                </h:commandLink>
+                </div>
+                <br/>
+                <div style="float:right;padding-top: 5px;">
+                 <h:commandLink>
+                    <p:graphicImage name="/images/pdf.png" width="24"/>
+                    <p:dataExporter type="pdf" target="tbl" fileName="Tutorias" pageOnly="true" />
+                </h:commandLink>
+                </div>
+                <!--<h:link outcome="/index" value="#{bundle.ListTutoriasIndexLink}"/>-->
+            </h:form>
+    </ui:define>
+</ui:composition>
+    </body> 
+</html>

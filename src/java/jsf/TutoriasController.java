@@ -1,5 +1,9 @@
 package jsf;
 
+import clasesEspeciales.Correo;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import jpa.entidades.Tutorias;
 import jsf.util.JsfUtil;
 import jsf.util.PaginationHelper;
@@ -15,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -22,6 +27,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.Part;
+import jpa.entidades.Users;
 
 @Named("tutoriasController")
 @SessionScoped
@@ -34,12 +41,37 @@ public class TutoriasController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private  DonutModel donutModel;
+    private Part file;
+    private String nombre;
+    private String pathReal;
+    private String mensaje;
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+    @EJB
+    private TutoriasFacade tutoriasFacade;
     
     private List<Tutorias> ListaTutorias;
+    
+   private List<Tutorias[]> ListaTutorias2;
 
     public List<Tutorias> getListaTutorias() {
         ListaTutorias = ejbFacade.findAll();
         return ListaTutorias;
+    }
+
+    public List<Tutorias[]> getListaTutorias2() {
+        
+        long  o = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("UserId").toString()) ; 
+        this.ListaTutorias2 = ejbFacade.ListaTutoriasFiltro(o);
+                System.out.println("Lista tutorias: "+ListaTutorias2);
+        return ListaTutorias2;
+
     }
 
     public void setListaTutorias(List<Tutorias> ListaTutorias) {
@@ -72,6 +104,61 @@ public class TutoriasController implements Serializable {
         return current;
     }
 
+    public Tutorias getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Tutorias current) {
+        this.current = current;
+    }
+
+    public TutoriasFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(TutoriasFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public int getSelectedItemIndex() {
+        return selectedItemIndex;
+    }
+
+    public void setSelectedItemIndex(int selectedItemIndex) {
+        this.selectedItemIndex = selectedItemIndex;
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPathReal() {
+        return pathReal;
+    }
+
+    public void setPathReal(String pathReal) {
+        this.pathReal = pathReal;
+    }
+
+    public TutoriasFacade getTutoriasFacade() {
+        return tutoriasFacade;
+    }
+
+    public void setTutoriasFacade(TutoriasFacade tutoriasFacade) {
+        this.tutoriasFacade = tutoriasFacade;
+    }
     private TutoriasFacade getFacade() {
         return ejbFacade;
     }
@@ -249,8 +336,84 @@ public class TutoriasController implements Serializable {
     public Tutorias getTutorias(java.lang.Long id) {
         return ejbFacade.find(id);
     }
-
+    
+    //Carga masiva de información
+    public String upload() {
+        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("Archivos");
+        path = path.substring(0, path.indexOf("\\build"));
+        path = path + "\\web\\Archivos\\";
+        try {
+         this.nombre = file.getSubmittedFileName();
+            pathReal = "/web/Archivos/" + nombre;
+            path = path + this.nombre;
+            InputStream in = file.getInputStream();
+            
+            byte[] data = new byte[in.available()];
+            in.read(data);
+           File archivo = new File(path);
+           path = path.replace("\\","\\\\");
+           System.out.println("esta es la ruta: " +path);
+           
+            FileOutputStream out = new FileOutputStream(archivo);
+            out.write(data);            
+            tutoriasFacade.cargarArchivo(path);
+            in.close();
+            out.close();
+            archivo.delete();
+            //JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("Archivo Cargado"));
+            setMensaje("Cargado con éxito.");    
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, "Se ha realizado la operación con éxito", "Se ha cargado el archivo"));
+        return "Cargado";
+        
+    }
+    
+    public void probarmetodo() {
+     for(Object usu: ejbFacade.listaEstudiantesDeben()){
+         System.out.println(usu);
+         
+     } 
+    
+    //envío correos masivos
+    /*public void envioCorreos() throws Exception {
+        List<Object> miLista =  tutoriasFacade.listaEstudiantesDeben();
+        enviarCorreo(miLista);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, "Se ha realizado la operación con éxito", "Se ha enviado la alerta"));
+    }
  
+
+    public void enviarCorreo(List<Object> miLista) throws Exception{
+     
+        
+        System.out.println("tutotias"+current);
+   String mensaje = "hola ";
+//        String mensaje = "Estimado Cliente <br/> la tutoría  "+current.getIdTutorias()+""
+//                    + " que se será tomada por el estudiante" +current.getEstudiantes().getUsers().getNombre() 
+//                    +" "+current.getEstudiantes().getUsers().getApellidos()+" no ha sido cancelada"
+//                        +" <br/><br/>Paperwoff <br/> Tel 3223094606";
+        
+
+       try{        
+        System.out.println("lista"+miLista);
+        if (!miLista.isEmpty() ) {
+            System.out.println("lista"+miLista);
+               Correo.send(miLista, "Tutorias: Retraso de Pago", mensaje);
+        }
+    
+       }catch(Exception e){
+       
+       throw e;
+       }*/
+
+    
+    }
+
+
         
     
 }

@@ -30,7 +30,7 @@ public class DisponibilidadController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Disponibilidad> Listadisponibles;
-    
+     private List<Disponibilidad[]> ListaDisponibles2;
 
     public DisponibilidadController() {
     }
@@ -43,6 +43,16 @@ public class DisponibilidadController implements Serializable {
     public void setListadisponibles(List<Disponibilidad> Listadisponibles) {
         this.Listadisponibles = Listadisponibles;
     }
+    
+    public List<Disponibilidad[]> getListaDisponiblesFiltro() {
+        
+        long  o = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("UserId").toString()) ; 
+        this.ListaDisponibles2 = ejbFacade.ListaDisponiblesFiltro(o);
+                System.out.println("Lista tutorias: "+ListaDisponibles2);
+        return ListaDisponibles2;
+
+    }
+    
 
     public Disponibilidad getSelected() {
         if (current == null) {

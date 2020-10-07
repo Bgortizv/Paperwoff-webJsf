@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <link href="../resources/Bottsrtap4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/EstilosMakiaDos.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+<body class="Color">
+        <ui:composition template="./../Pagina Maestra/TemplateTutores.xhtml">
+<ui:define name="content">
+            <div class="title_left">
+                            <h3>Cuentas de cobro</h3>
+                        </div>
+
+                        <div class="title_right">
+                            <div class="col-md-5 col-sm-5 col-xs-12 pull-right">
+
+                            </div>
+                        </div>
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListFacturaEmpty}" rendered="#{facturaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{facturaController.items.rowCount > 0}">
+                    <h:outputText value="#{facturaController.pagination.pageFirstItem + 1}..#{facturaController.pagination.pageLastItem + 1}/#{facturaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{facturaController.previous}" value="#{bundle.Previous} #{facturaController.pagination.pageSize}" rendered="#{facturaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{facturaController.next}" value="#{bundle.Next} #{facturaController.pagination.pageSize}" rendered="#{facturaController.pagination.hasNextPage}"/>&nbsp;
+             
+            <div class="row">            
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                            <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
+                                
+                                <p:dataTable id="factura" value="#{facturaController.listaFactura2}" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline" var="factura" style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Documento"/>
+                            </f:facet>
+                            <h:outputText value="#{factura[0]}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tutor"/>
+                            </f:facet>
+                            <h:outputText value="#{factura[1]}">
+                                 </h:outputText>&nbsp;
+                                <h:outputText value="#{factura[2]}">
+                                </h:outputText>
+                     
+                        </p:column>
+                           <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Total horas"/>
+                            </f:facet>
+                            <h:outputText value="#{factura[3]}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="# Factura"/>
+                            </f:facet>
+                            <h:outputText value="#{factura[4]}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFacturaTitle_fechaCreacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{factura[5]}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                                              
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Total"/>
+                            </f:facet>
+                            <h:outputText value="#{factura[6]}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{facturaController.prepareView}" value="#{bundle.ListFacturaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{facturaController.prepareEdit}" value="#{bundle.ListFacturaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{facturaController.destroy}" value="#{bundle.ListFacturaDestroyLink}"/>
+                        </p:column>
+                    </p:dataTable>
+                 </div>
+                    </div>
+                </div>
+               
+                </div>
+                    </div>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{facturaController.prepareCreate}" value="#{bundle.ListFacturaCreateLink}"/>
+                <br />
+                <br />
+                <div style="float:right;padding-top: 5px;">
+                 <h:commandLink>
+                    <p:graphicImage name="/images/excel.png" width="24"/>
+                    <p:dataExporter type="xls" target="factura" fileName="Facturas" pageOnly="true" />
+                </h:commandLink>
+                </div>
+                <!--<h:link outcome="/index" value="#{bundle.ListFacturaIndexLink}"/>-->
+            </h:form>
+        </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

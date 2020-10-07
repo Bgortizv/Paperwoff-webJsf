@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <link href="../resources/Bottsrtap4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/EstilosMakiaDos.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+<body class="Color">
+        <ui:composition template="./../Pagina Maestra/TemplateTutores.xhtml">
+ <ui:define name="content">
+            <h:form styleClass="jsfcrud_list_form" enctype="multipart/form-data">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListDisponibilidadEmpty}" rendered="#{disponibilidadController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{disponibilidadController.items.rowCount > 0}">
+                    <h:outputText value="#{disponibilidadController.pagination.pageFirstItem + 1}..#{disponibilidadController.pagination.pageLastItem + 1}/#{disponibilidadController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{disponibilidadController.previous}" value="#{bundle.Previous} #{disponibilidadController.pagination.pageSize}" rendered="#{disponibilidadController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{disponibilidadController.next}" value="#{bundle.Next} #{disponibilidadController.pagination.pageSize}" rendered="#{disponibilidadController.pagination.hasNextPage}"/>&nbsp;
+            
+            
+            <div class="row">            
+                <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                        <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                            <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
+            
+                    
+                                <p:dataTable id="tbl" value="#{disponibilidadController.listaDisponiblesFiltro}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline Color"  style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDisponibilidadTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[0]}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDisponibilidadTitle_horainicio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[1]}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDisponibilidadTitle_horafin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[2]}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDisponibilidadTitle_tutoresidTutores}"/>
+                            </f:facet>
+                            <h:outputText value="#{item[3]}" /> &nbsp;
+                            <h:outputText value="#{item[4]}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{disponibilidadController.prepareView}" value="#{bundle.ListDisponibilidadViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{disponibilidadController.prepareEdit}" value="#{bundle.ListDisponibilidadEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{disponibilidadController.destroy}" value="#{bundle.ListDisponibilidadDestroyLink}"/>
+                        </p:column>
+                    </p:dataTable>
+                               
+                                </div>                   
+                            </div>
+                        </div>
+                    </div>
+                 </div> 
+      
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{disponibilidadController.prepareCreate}" value="#{bundle.ListDisponibilidadCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListDisponibilidadIndexLink}"/>
+            </h:form>
+        </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,22 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24/09/2020, 04:21:38 PM
+    Author     : Gus
+*/
+
+
+.input, .button, .select, .optgroup, .textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background-color: red;
+}
+
+.Color{
+    background-color: red;
+}

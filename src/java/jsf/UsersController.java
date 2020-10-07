@@ -1,11 +1,13 @@
 package jsf;
 
+import clasesEspeciales.MailSender;
 import jpa.entidades.Users;
 import jsf.util.JsfUtil;
 import jsf.util.PaginationHelper;
 import jpa.sessions.UsersFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -30,6 +32,76 @@ public class UsersController implements Serializable {
     private Users prueba;
     private Users InicioSes;
     private DataModel items = null;
+    private String fromMail;
+
+    public Users getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Users current) {
+        this.current = current;
+    }
+
+    public String getFromMail() {
+        return fromMail;
+    }
+
+    public void setFromMail(String fromMail) {
+        this.fromMail = fromMail;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Object> getToMail() {
+        return toMail;
+    }
+
+    public void setToMail(List<Object> toMail) {
+        this.toMail = toMail;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getSelectedItemIndex() {
+        return selectedItemIndex;
+    }
+
+    public void setSelectedItemIndex(int selectedItemIndex) {
+        this.selectedItemIndex = selectedItemIndex;
+    }
+    private String username;
+    private String password;
+    private List<Object> toMail = new ArrayList<>();
+    private String subject;
+    private String message;
     @EJB
     private jpa.sessions.UsersFacade ejbFacade;
     private PaginationHelper pagination;
@@ -60,11 +132,23 @@ String pass  = InicioSes.getPassword();
              uscontra= ejbFacade.ValidarContrasenia(documento,pass );
              
                if(uscontra!=null) {
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("NombreUsuario", InicioSes.getNombre());
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserDocumento", InicioSes.getDocumento());
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserId", InicioSes.getIdUser());
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Contrasenia", InicioSes.getPassword());
-               url="/faces/Dashboard.xhtml?faces-redirect=true";
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("NombreUsuario", uscontra.getNombre());
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserDocumento", uscontra.getDocumento());
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserId", uscontra.getIdUser());
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Contrasenia", uscontra.getPassword());
+               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Role", uscontra.getRoles());
+               switch (uscontra.getRoles().getIdRole()){
+                   case 1:
+                    url="/faces/Dashboard.xhtml?faces-redirect=true";
+                    break;
+                   case 2:
+                    url="/faces/tutorias/VistaTutoresList.xhtml?faces-redirect=true";
+                    break;
+                    case 3:
+                    url="/faces/tutorias/List.xhtml?faces-redirect=true";    
+               }
+               
+               
                 } else {
                     FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "La contraseña es incorrecta", "");
@@ -291,6 +375,23 @@ String pass  = InicioSes.getPassword();
         return ejbFacade.find(id);
     }
 
-
-
+     public void send() {
+        toMail = ejbFacade.obtenerCorreos();
+         System.out.println("lista de correos "+toMail);
+        try {
+            MailSender mailSender=new MailSender();
+            
+          mailSender.sendMail(fromMail, username, password, toMail, subject, message);
+        } catch (Exception e) {
+            System.out.println("correo no enviado");
+        }
+    }
+    
+    
+//    public void probarmetodo() {
+//     for(Users usu: ejbFacade.obtenerCorreos()){
+//         System.out.println(usu);
+//         
+//     } 
+//    }
 }

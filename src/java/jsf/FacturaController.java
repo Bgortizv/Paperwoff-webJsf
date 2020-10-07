@@ -31,12 +31,33 @@ public class FacturaController implements Serializable {
     private int selectedItemIndex;
  
     private List<Factura> ListaFactura;
-
+    private List<Factura[]> ListaFactura2;
+    private List<Factura> ListaFactura3;
+    
     public List<Factura> getListaFactura() {
       ListaFactura =   ejbFacade.findAll();
         return ListaFactura;
     }
 
+    public List<Factura[]> getListaFactura2() {
+        
+        long  o = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("UserId").toString()) ; 
+        this.ListaFactura2 = ejbFacade.ListaFacturasFiltro(o);
+                System.out.println("Lista tutorias: "+ListaFactura2);
+        return ListaFactura2;
+
+    }
+    
+//    public List<Factura> getListaFactura3() {
+//        
+//        long  os = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("UserId").toString()) ; 
+//        this.ListaFactura3 = ejbFacade.ListaFacturasFiltroPrueba(os);
+//                System.out.println("Lista tutorias: "+ListaFactura3);
+//        return ListaFactura3;
+//
+//    }
+    
+    
     public void setListaFactura(List<Factura> ListaFactura) {
         this.ListaFactura = ListaFactura;
     }

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
    <body>
         
@@ -29,10 +30,11 @@
                     <h:inputText id="horafin" value="#{disponibilidadController.selected.horafin}" title="#{bundle.CreateDisponibilidadTitle_horafin}" >
                         <f:convertDateTime pattern="HH:mm:ss" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateDisponibilidadLabel_tutoresidTutores}" for="tutoresidTutores" />
-                    <h:selectOneMenu id="tutoresidTutores" value="#{disponibilidadController.selected.tutoresidTutores}" title="#{bundle.CreateDisponibilidadTitle_tutoresidTutores}" required="true" requiredMessage="#{bundle.CreateDisponibilidadRequiredMessage_tutoresidTutores}">
-                        <f:selectItems value="#{tutoresController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    <p:outputLabel value="#{bundle.CreateDisponibilidadLabel_tutoresidTutores}" for="tutoresidTutores" />
+                    <p:autoComplete id="tutoresidTutores" value="#{disponibilidadController.selected.tutores}" completeMethod="#{tutoresController.listarTutores()}" var="item"
+                                                    converter="TutoresConverter" itemLabel="#{item}"
+                                                       itemValue="#{item}"> 
+                    </p:autoComplete>>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{disponibilidadController.create}" value="#{bundle.CreateDisponibilidadSaveLink}" />
