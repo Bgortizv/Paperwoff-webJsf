@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
         
@@ -15,8 +16,7 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_idTutorias}" for="idTutorias" />
-                    <h:inputText id="idTutorias" value="#{tutoriasController.selected.idTutorias}" title="#{bundle.CreateTutoriasTitle_idTutorias}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_idTutorias}"/>
+                    
                     <h:outputLabel value="#{bundle.CreateTutoriasLabel_fecha}" for="fecha" />
                     <h:inputText id="fecha" value="#{tutoriasController.selected.fecha}" title="#{bundle.CreateTutoriasTitle_fecha}" >
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
@@ -45,10 +45,16 @@
                     <h:selectOneMenu id="usersidUser" value="#{tutoriasController.selected.users}" title="#{bundle.CreateTutoriasTitle_usersidUser}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_usersidUser}">
                         <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_tutoresidTutores}" for="tutoresidTutores" />
-                    <h:selectOneMenu id="tutoresidTutores" value="#{tutoriasController.selected.tutores}" title="#{bundle.CreateTutoriasTitle_tutoresidTutores}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_tutoresidTutores}">
-                        <f:selectItems value="#{tutoresController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    
+                    <p:outputLabel value="#{bundle.CreateTutoriasLabel_tutoresidTutores}" for="tutoresidTutores" />
+                    <p:autoComplete
+                        id="tutor" value="#{tutoriasController.selected.tutores}"
+                        completeMethod="#{tutoresController.listarTutores()}" var="item"
+                        converter="TutoresConverter" itemLabel="#{item}" minQueryLength="5"
+                        itemValue="#{item}"                       
+                    </p:autoComplete>
+                    
+                    
                     <h:outputLabel value="#{bundle.CreateTutoriasLabel_asignaturaidAsignatura}" for="asignaturaidAsignatura" />
                     <h:selectOneMenu id="asignaturaidAsignatura" value="#{tutoriasController.selected.asignatura}" title="#{bundle.CreateTutoriasTitle_asignaturaidAsignatura}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_asignaturaidAsignatura}">
                         <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
