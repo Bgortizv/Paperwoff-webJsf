@@ -6,49 +6,79 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-        
+
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
-                    
-        <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditUsersLabel_idUser}" for="idUser" />
-                    <h:inputText id="idUser" value="#{usersController.selected.idUser}" title="#{bundle.EditUsersTitle_idUser}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_idUser}"/>
-                    <h:outputLabel value="#{bundle.EditUsersLabel_documento}" for="documento" />
-                    <h:inputText id="documento" value="#{usersController.selected.documento}" title="#{bundle.EditUsersTitle_documento}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_nombre}" for="nombre" />
-                    <h:inputText id="nombre" value="#{usersController.selected.nombre}" title="#{bundle.EditUsersTitle_nombre}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_apellidos}" for="apellidos" />
-                    <h:inputText id="apellidos" value="#{usersController.selected.apellidos}" title="#{bundle.EditUsersTitle_apellidos}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_EMail}" for="EMail" />
-                    <h:inputText id="EMail" value="#{usersController.selected.EMail}" title="#{bundle.EditUsersTitle_EMail}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_celular}" for="celular" />
-                    <h:inputText id="celular" value="#{usersController.selected.celular}" title="#{bundle.EditUsersTitle_celular}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_estado}" for="estado" />
-                    <h:inputText id="estado" value="#{usersController.selected.estado}" title="#{bundle.EditUsersTitle_estado}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_direccion}" for="direccion" />
-                    <h:inputText id="direccion" value="#{usersController.selected.direccion}" title="#{bundle.EditUsersTitle_direccion}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_cargo}" for="cargo" />
-                    <h:inputText id="cargo" value="#{usersController.selected.cargo}" title="#{bundle.EditUsersTitle_cargo}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_password}" for="password" />
-                    <h:inputText id="password" value="#{usersController.selected.password}" title="#{bundle.EditUsersTitle_password}" />
-                    <h:outputLabel value="#{bundle.EditUsersLabel_role}" for="role" />
-                    <h:inputText id="role" value="#{usersController.selected.role}" title="#{bundle.EditUsersTitle_role}" />
-                </h:panelGrid>
-                <h:commandLink action="#{usersController.update}" value="#{bundle.EditUsersSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditUsersViewLink}"/>
-                <br />
-                <h:commandLink action="#{usersController.prepareList}" value="#{bundle.EditUsersShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditUsersIndexLink}" />
-            </h:form>
-        </ui:define>
-    </ui:composition>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                        <h:panelGrid frame="above" columns="2">
+
+                        </h:panelGrid>
+                        <section class="section-form m-auto col-md-8 "  id="createTutoria" >
+
+                            <div class="row" align="center">
+
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Editar Usuario</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+
+                            <h:panelGrid columns="2">
+                                
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_documento}" for="documento" />
+                                <h:inputText class="col-form-label-sm" id="documento" value="#{usersController.selected.documento}" title="#{bundle.EditUsersTitle_documento}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_nombre}" for="nombre" />
+                                <h:inputText class="col-form-label-sm" id="nombre" value="#{usersController.selected.nombre}" title="#{bundle.EditUsersTitle_nombre}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_apellidos}" for="apellidos" />
+                                <h:inputText class="col-form-label-sm" id="apellidos" value="#{usersController.selected.apellidos}" title="#{bundle.EditUsersTitle_apellidos}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_EMail}" for="EMail" />
+                                <h:inputText class="col-form-label-sm" id="EMail" value="#{usersController.selected.EMail}" title="#{bundle.EditUsersTitle_EMail}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_celular}" for="celular" />
+                                <h:inputText class="col-form-label-sm" id="celular" value="#{usersController.selected.celular}" title="#{bundle.EditUsersTitle_celular}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_estado}" for="estado" />
+                                <h:inputText class="col-form-label-sm" id="estado" value="#{usersController.selected.estado}" title="#{bundle.EditUsersTitle_estado}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_direccion}" for="direccion" />
+                                <h:inputText class="col-form-label-sm" id="direccion" value="#{usersController.selected.direccion}" title="#{bundle.EditUsersTitle_direccion}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_cargo}" for="cargo" />
+                                <h:inputText class="col-form-label-sm" id="cargo" value="#{usersController.selected.cargo}" title="#{bundle.EditUsersTitle_cargo}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_password}" for="password" />
+                                <h:inputText class="col-form-label-sm" id="password" value="#{usersController.selected.password}" title="#{bundle.EditUsersTitle_password}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.EditUsersLabel_role}" for="role" />
+                                <h:selectOneMenu  class="custom-select" id="role"
+                                                 value="#{usersController.selectedRole}" 
+                                                 required="true"
+                                                 requiredMessage="Seleccione un rol">
+                                    <f:selectItems value="#{usersController.listaRoles}"
+                                                   var="role"
+                                                   itemLabel="#{role.nombreRol}"
+                                                   itemValue="#{role.idRole}"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                            <br/>            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h:link class="DTTT_button rounded color-swatch" outcome="View" value="Cancelar"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <h:commandButton class="btn-sm btn-success" action="#{usersController.update}" value="Guardar"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <h:commandButton class="btn-sm btn-primary" action="#{usersController.prepareList}" value="#{bundle.EditUsersShowAllLink}" immediate="true"/>
+
+
+                        </section>
+                    </div>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </body>
 </html>

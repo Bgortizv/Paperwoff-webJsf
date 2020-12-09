@@ -6,51 +6,77 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-        
+
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
-                    
-        <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    
-                    <h:outputLabel value="#{bundle.CreateFacturaLabel_fecha}" for="fecha" />
-                    <h:inputText id="fecha" value="#{facturaController.selected.fecha}" title="#{bundle.CreateFacturaTitle_fecha}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateFacturaLabel_total}" for="total" />
-                    <h:inputText id="total" value="#{facturaController.selected.total}" title="#{bundle.CreateFacturaTitle_total}" />
-                    <h:outputLabel value="#{bundle.CreateFacturaLabel_fechaCreacion}" for="fechaCreacion" />
-                    <h:inputText id="fechaCreacion" value="#{facturaController.selected.fechaCreacion}" title="#{bundle.CreateFacturaTitle_fechaCreacion}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateFacturaLabel_incioPeriodo}" for="incioPeriodo" />
-                    <h:inputText id="incioPeriodo" value="#{facturaController.selected.incioPeriodo}" title="#{bundle.CreateFacturaTitle_incioPeriodo}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateFacturaLabel_finPeriodo}" for="finPeriodo" />
-                    <h:inputText id="finPeriodo" value="#{facturaController.selected.finPeriodo}" title="#{bundle.CreateFacturaTitle_finPeriodo}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateFacturaLabel_totalhoras}" for="totalhoras" />
-                    <h:inputText id="totalhoras" value="#{facturaController.selected.totalhoras}" title="#{bundle.CreateFacturaTitle_totalhoras}" />
-                    <h:outputLabel value="#{bundle.CreateFacturaLabel_tutoresidTutores}" for="tutoresidTutores" />
-                    <h:selectOneMenu id="tutoresidTutores" value="#{facturaController.selected.tutores}" title="#{bundle.CreateFacturaTitle_tutoresidTutores}" required="true" requiredMessage="#{bundle.CreateFacturaRequiredMessage_tutoresidTutores}">
-                        <f:selectItems value="#{tutoresController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{facturaController.create}" value="#{bundle.CreateFacturaSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{facturaController.prepareList}" value="#{bundle.CreateFacturaShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateFacturaIndexLink}"/>
-            </h:form>
-        </ui:define>
-    </ui:composition>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                        <h:panelGrid frame="above" columns="2">
+
+                        </h:panelGrid>
+                        <section class="section-form m-auto col-md-8 "  id="createTutoria" >
+
+                            <div class="row" align="center">
+
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Crear Factura</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+
+                            <h:panelGrid columns="2">
+
+                                <h:outputLabel value="#{bundle.CreateFacturaLabel_fecha}" for="fecha" class="col-form-label-sm"/>
+                                <h:inputText id="fecha" class="col-form-label-sm" value="#{facturaController.selected.fecha}" title="#{bundle.CreateFacturaTitle_fecha}" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:inputText>
+                                <h:outputLabel value="#{bundle.CreateFacturaLabel_total}" for="total" class="col-form-label-sm" />
+                                <h:inputText id="total" class="col-form-label-sm" value="#{facturaController.selected.total}" title="#{bundle.CreateFacturaTitle_total}" />
+                                
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.CreateFacturaLabel_incioPeriodo}" for="incioPeriodo" />
+                                <h:inputText class="col-form-label-sm" id="incioPeriodo" value="#{facturaController.selected.incioPeriodo}" title="#{bundle.CreateFacturaTitle_incioPeriodo}" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:inputText>
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.CreateFacturaLabel_finPeriodo}" for="finPeriodo" />
+                                <h:inputText class="col-form-label-sm" id="finPeriodo" value="#{facturaController.selected.finPeriodo}" title="#{bundle.CreateFacturaTitle_finPeriodo}" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:inputText>
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.CreateFacturaLabel_totalhoras}" for="totalhoras" />
+                                <h:inputText class="col-form-label-sm" id="totalhoras" value="#{facturaController.selected.totalhoras}" title="#{bundle.CreateFacturaTitle_totalhoras}" />
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.CreateFacturaLabel_tutoresidTutores}" for="tutoresidTutores" />
+                                <h:selectOneMenu id="tutoresidTutores" class="custom-select" value="#{facturaController.selected.tutores}" 
+                                                 required="true" 
+                                                 requiredMessage="Debe seleccionar un tutor">
+                                    <f:selectItems value="#{tutoriasController.listaTutores()}"
+                                                   var="tutor"
+                                                   itemLabel="#{tutor.users.nombre}&#32;#{tutor.users.apellidos}"
+                                                   itemValue="#{tutor}"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+
+                            <div class="row"></div>
+                            <br/>
+                            <div class="col-md-6">
+                                <h:commandButton class="btn-sm btn-danger" action="#{facturaController.prepareList}" value="#{bundle.CreateFacturaShowAllLink}" immediate="true"/>
+                            </div>
+
+
+                            <h:commandButton action="#{facturaController.create}" value="Guardar" class="btn-sm btn-success "/>
+
+
+                            
+
+
+                        </section>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </body>
 </html>

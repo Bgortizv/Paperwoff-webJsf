@@ -4,72 +4,101 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-   
-    <body>
-        
-        <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
-                    
-        <ui:define name="content">
-            
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_idTutorias}"/>
-                    <h:outputText value="#{tutoriasController.selected.idTutorias}" title="#{bundle.ViewTutoriasTitle_idTutorias}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_fecha}"/>
-                    <h:outputText value="#{tutoriasController.selected.fecha}" title="#{bundle.ViewTutoriasTitle_fecha}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_creacion}"/>
-                    <h:outputText value="#{tutoriasController.selected.creacion}" title="#{bundle.ViewTutoriasTitle_creacion}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_transporte}"/>
-                    <h:outputText value="#{tutoriasController.selected.transporte}" title="#{bundle.ViewTutoriasTitle_transporte}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_total}"/>
-                    <h:outputText value="#{tutoriasController.selected.total}" title="#{bundle.ViewTutoriasTitle_total}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_horainicio}"/>
-                    <h:outputText value="#{tutoriasController.selected.horainicio}" title="#{bundle.ViewTutoriasTitle_horainicio}">
-                        <f:convertDateTime pattern="HH:mm:ss" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_horafin}"/>
-                    <h:outputText value="#{tutoriasController.selected.horafin}" title="#{bundle.ViewTutoriasTitle_horafin}">
-                        <f:convertDateTime pattern="HH:mm:ss" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_cantidadHoras}"/>
-                    <h:outputText value="#{tutoriasController.selected.cantidadHoras}" title="#{bundle.ViewTutoriasTitle_cantidadHoras}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_paga}"/>
-                    <h:outputText value="#{tutoriasController.selected.paga}" title="#{bundle.ViewTutoriasTitle_paga}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_users}"/>
-                    <h:outputText value="#{tutoriasController.selected.users}" title="#{bundle.ViewTutoriasTitle_usersidUser}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_tutoresidTutores}"/>
-                    <h:outputText value="#{tutoriasController.selected.tutores}" title="#{bundle.ViewTutoriasTitle_tutoresidTutores}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_asignaturaidAsignatura}"/>
-                    <h:outputText value="#{tutoriasController.selected.asignatura}" title="#{bundle.ViewTutoriasTitle_asignaturaidAsignatura}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_estudiantesidEstudiantes}"/>
-                    <h:outputText value="#{tutoriasController.selected.estudiantes}" title="#{bundle.ViewTutoriasTitle_estudiantesidEstudiantes}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_tipoClaseidTipoClase}"/>
-                    <h:outputText value="#{tutoriasController.selected.tipoClase}" title="#{bundle.ViewTutoriasTitle_tipoClaseidTipoClase}"/>
-                    <h:outputText value="#{bundle.ViewTutoriasLabel_virPresidVirPres}"/>
-                    <h:outputText value="#{tutoriasController.selected.virpres}" title="#{bundle.ViewTutoriasTitle_virPresidVirPres}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{tutoriasController.destroyAndView}" value="#{bundle.ViewTutoriasDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewTutoriasEditLink}"/>
-                <br />
-                <h:commandLink action="#{tutoriasController.prepareCreate}" value="#{bundle.ViewTutoriasCreateLink}" />
-                <br />
-                <h:commandLink action="#{tutoriasController.prepareList}" value="#{bundle.ViewTutoriasShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewTutoriasIndexLink}"/>
 
-            </h:form>
-        </ui:define>
-    </ui:composition>
-</body>
+    <body>
+
+        <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                        <h:panelGrid frame="above" columns="2">
+
+                        </h:panelGrid>
+                        <section class="section-form m-auto col-md-8 "  id="Edit Tutoria" >
+
+                            <div class="row" align="center">
+
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Detalle Tutoría</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+
+
+                            <h:panelGrid columns="4">
+
+
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_fecha}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.fecha}" title="#{bundle.ViewTutoriasTitle_fecha}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_creacion}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.creacion}" title="#{bundle.ViewTutoriasTitle_creacion}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                                <h:outputText value="#{bundle.ViewTutoriasLabel_idTutorias}" class="form-control-md"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.idTutorias}" title="#{bundle.ViewTutoriasTitle_idTutorias}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_transporte}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.transporte}" title="#{bundle.ViewTutoriasTitle_transporte}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_total}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.total}" title="#{bundle.ViewTutoriasTitle_total}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_horainicio}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.horainicio}" title="#{bundle.ViewTutoriasTitle_horainicio}">
+                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                </h:outputText>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_horafin}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.horafin}" title="#{bundle.ViewTutoriasTitle_horafin}">
+                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                </h:outputText>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_cantidadHoras}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.cantidadHoras}" title="#{bundle.ViewTutoriasTitle_cantidadHoras}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_paga}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.paga}" title="#{bundle.ViewTutoriasTitle_paga}"/>
+                                <h:outputText class="form-control-md" value="Id Tutor"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.users}" title="#{bundle.ViewTutoriasTitle_usersidUser}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_tutoresidTutores}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.tutores}" title="#{bundle.ViewTutoriasTitle_tutoresidTutores}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_asignaturaidAsignatura}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.asignatura}" title="#{bundle.ViewTutoriasTitle_asignaturaidAsignatura}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_estudiantesidEstudiantes}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.estudiantes}" title="#{bundle.ViewTutoriasTitle_estudiantesidEstudiantes}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_tipoClaseidTipoClase}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.tipoClase}" title="#{bundle.ViewTutoriasTitle_tipoClaseidTipoClase}"/>
+                                <h:outputText class="form-control-md" value="#{bundle.ViewTutoriasLabel_virPresidVirPres}"/>
+                                <h:outputText class="form-control-md" value="#{tutoriasController.selected.virpres}" title="#{bundle.ViewTutoriasTitle_virPresidVirPres}"/>
+                            </h:panelGrid>
+                            <br/><br/>
+                            <div class="row">
+                                <div class="col-sm-4" align="center">    
+                                    <h:commandButton class="btn-sm btn-danger" action="#{tutoriasController.destroyAndView}" value="#{bundle.ViewTutoriasDestroyLink}"/>
+                                </div>
+                                <div class="col-md-4">    
+                                    <h:link class="DTTT_button" outcome="Edit" value="Editar"/>
+                                </div>
+                                
+                                <div class="col-sm-4">
+                                    <h:commandButton class="btn-sm btn-success" action="#{tutoriasController.prepareCreate}" value="Crear" />
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6" >
+                                <h:commandButton class="btn-sm btn-dark" action="#{tutoriasController.prepareList}" value="#{bundle.ViewTutoriasShowAllLink}"/>
+                                </div>
+                                </div>
+
+                        </section>
+                    </div>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>

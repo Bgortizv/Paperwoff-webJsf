@@ -11,7 +11,15 @@
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
                     
        <ui:define name="content">
-            <h:form styleClass="jsfcrud_list_form" enctype="multipart/form-data">
+            <h:form styleClass="jsfcrud_list_form">
+                    <br/><br/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2>Disponibilidad</h2>
+                        </div>
+                        
+                        <div class="col-md-4"></div>
+                    </div>
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -20,7 +28,14 @@
                     <h:outputText value="#{disponibilidadController.pagination.pageFirstItem + 1}..#{disponibilidadController.pagination.pageLastItem + 1}/#{disponibilidadController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{disponibilidadController.previous}" value="#{bundle.Previous} #{disponibilidadController.pagination.pageSize}" rendered="#{disponibilidadController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{disponibilidadController.next}" value="#{bundle.Next} #{disponibilidadController.pagination.pageSize}" rendered="#{disponibilidadController.pagination.hasNextPage}"/>&nbsp;
-            
+            br/><br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h:commandButton class="btn-sm btn-primary" action="#{disponibilidadController.prepareCreate}" value="Crear Disponibilidad"/>
+                            </div>
+                        </div>
+                        <br/><br/>
+                     
             
             <div class="row">            
                 <div class="col-sm-12">
@@ -65,11 +80,11 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{disponibilidadController.prepareView}" value="#{bundle.ListDisponibilidadViewLink}"/>
+                            <h:commandButton class="btn-sm btn-primary btn-round" action="#{disponibilidadController.prepareView}" value="#{bundle.ListDisponibilidadViewLink}"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{disponibilidadController.prepareEdit}" value="#{bundle.ListDisponibilidadEditLink}"/>
+                            <h:commandButton class="btn-sm btn-success btn-round" action="#{disponibilidadController.prepareEdit}" value="#{bundle.ListDisponibilidadEditLink}"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{disponibilidadController.destroy}" value="#{bundle.ListDisponibilidadDestroyLink}"/>
+                            <h:commandButton class="btn-sm btn-danger btn-round" action="#{disponibilidadController.destroy}" value="#{bundle.ListDisponibilidadDestroyLink}"/>
                         </p:column>
                     </p:dataTable>
                                
@@ -79,11 +94,10 @@
                     </div>
                  </div> 
                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{disponibilidadController.prepareCreate}" value="#{bundle.ListDisponibilidadCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListDisponibilidadIndexLink}"/>
+               
+               
+               
+                
             </h:form>
         </ui:define>
     </ui:composition>

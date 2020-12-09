@@ -5,40 +5,55 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-   <body>
-        
+    <body>
+
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
-                    
-        <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditTutoresLabel_idTutores}" for="idTutores" />
-                    <h:inputText id="idTutores" value="#{tutoresController.selected.idTutores}" title="#{bundle.EditTutoresTitle_idTutores}" required="true" requiredMessage="#{bundle.EditTutoresRequiredMessage_idTutores}"/>
-                    <h:outputLabel value="#{bundle.EditTutoresLabel_fechaIngreso}" for="fechaIngreso" />
-                    <h:inputText id="fechaIngreso" value="#{tutoresController.selected.fechaIngreso}" title="#{bundle.EditTutoresTitle_fechaIngreso}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.EditTutoresLabel_profesion}" for="profesion" />
-                    <h:inputText id="profesion" value="#{tutoresController.selected.profesion}" title="#{bundle.EditTutoresTitle_profesion}" />
-                    <h:outputLabel value="#{bundle.EditTutoresLabel_users}" for="usersidUser" />
-                    <h:selectOneMenu id="usersidUser" value="#{tutoresController.selected.users}" title="#{bundle.EditTutoresTitle_users}" required="true" requiredMessage="#{bundle.EditTutoresRequiredMessage_users}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <h:commandLink action="#{tutoresController.update}" value="#{bundle.EditTutoresSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditTutoresViewLink}"/>
-                <br />
-                <h:commandLink action="#{tutoresController.prepareList}" value="#{bundle.EditTutoresShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditTutoresIndexLink}" />
-            </h:form>
-        </ui:define>
-    </ui:composition>
-   </body>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                        <h:panelGrid columns="2"></h:panelGrid>
+                        <section class="section-form m-auto col-md-8 "  id="createTutoria" >   
+                            <div class="row" align="center">
+
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Editar Tutor</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+
+                            <h:panelGrid columns="2">
+                                
+                                <h:outputLabel class="form-label-sm" value="#{bundle.EditTutoresLabel_fechaIngreso}" for="fechaIngreso" />
+                                <h:inputText class="form-control" id="fechaIngreso" value="#{tutoresController.selected.fechaIngreso}" title="#{bundle.EditTutoresTitle_fechaIngreso}" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:inputText>
+                                <h:outputLabel class="form-label-sm" value="#{bundle.EditTutoresLabel_profesion}" for="profesion" />
+                                <h:inputText class="form-control" id="profesion" value="#{tutoresController.selected.profesion}" title="#{bundle.EditTutoresTitle_profesion}" />
+                                 
+                                </h:panelGrid>
+                            <br/><br/>
+                            <div class="row">
+                                <div class="col-md-4">
+                                <h:commandButton class="btn-sm btn-danger" action="#{tutoresController.prepareList}" value="#{bundle.EditTutoresShowAllLink}" immediate="true"/>
+                            </div>
+                                <div class="col-md-4">
+                            <h:link outcome="View" value="#{bundle.EditTutoresViewLink}"/>
+                            </div>
+                                <div class="col-md-4">
+                                    <h:commandButton class="btn-sm btn-success" action="#{tutoresController.update}" value="Guardar"/>
+                                    
+                            </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>

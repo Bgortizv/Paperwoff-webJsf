@@ -5,59 +5,84 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-   <body>
+    <body>
 
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
 
-            
-        <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewFacturaLabel_idFactura}"/>
-                    <h:outputText value="#{facturaController.selected.idFactura}" title="#{bundle.ViewFacturaTitle_idFactura}"/>
-                    <h:outputText value="#{bundle.ViewFacturaLabel_fecha}"/>
-                    <h:outputText value="#{facturaController.selected.fecha}" title="#{bundle.ViewFacturaTitle_fecha}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewFacturaLabel_total}"/>
-                    <h:outputText value="#{facturaController.selected.total}" title="#{bundle.ViewFacturaTitle_total}"/>
-                    <h:outputText value="#{bundle.ViewFacturaLabel_fechaCreacion}"/>
-                    <h:outputText value="#{facturaController.selected.fechaCreacion}" title="#{bundle.ViewFacturaTitle_fechaCreacion}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewFacturaLabel_incioPeriodo}"/>
-                    <h:outputText value="#{facturaController.selected.incioPeriodo}" title="#{bundle.ViewFacturaTitle_incioPeriodo}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewFacturaLabel_finPeriodo}"/>
-                    <h:outputText value="#{facturaController.selected.finPeriodo}" title="#{bundle.ViewFacturaTitle_finPeriodo}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewFacturaLabel_totalhoras}"/>
-                    <h:outputText value="#{facturaController.selected.totalhoras}" title="#{bundle.ViewFacturaTitle_totalhoras}"/>
-                    
-                    <h:outputText value="#{bundle.ViewFacturaLabel_tutoresidTutores}"/>
-                    <h:outputText value="#{facturaController.selected.tutores.users.nombre}" title="#{bundle.ViewFacturaTitle_tutoresidTutores}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{facturaController.destroyAndView}" value="#{bundle.ViewFacturaDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewFacturaEditLink}"/>
-                <br />
-                <h:commandLink action="#{facturaController.prepareCreate}" value="#{bundle.ViewFacturaCreateLink}" />
-                <br />
-                <h:commandLink action="#{facturaController.prepareList}" value="#{bundle.ViewFacturaShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewFacturaIndexLink}"/>
 
-            </h:form>
-        </ui:define>
-    </ui:composition>
-       
-   </body>
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                        <h:panelGrid frame="above" columns="2">
+
+                        </h:panelGrid>
+                        <section class="section-form m-auto col-md-8 "  id="createTutoria" >
+
+                            <div class="row" align="center">
+
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Detalle Factura</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+
+                            <h:panelGrid columns="2" border="1" >
+                                <h:outputText class="col-form-label-sm" value="#{bundle.ViewFacturaLabel_idFactura}"/>
+                                <h:outputText class="col-form-label-sm" value="#{facturaController.selected.idFactura}" title="#{bundle.ViewFacturaTitle_idFactura}"/>
+                                <h:outputText class="col-form-label-sm" value="#{bundle.ViewFacturaLabel_fecha}"/>
+                                <h:outputText class="col-form-label-sm" value="#{facturaController.selected.fecha}" title="#{bundle.ViewFacturaTitle_fecha}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText class="col-form-label-sm" value="#{bundle.ViewFacturaLabel_total}"/>
+                                <h:outputText class="col-form-label-sm" value="#{facturaController.selected.total}" title="#{bundle.ViewFacturaTitle_total}"/>
+                                <h:outputText class="col-form-label-sm" value="#{bundle.ViewFacturaLabel_fechaCreacion}"/>
+                                <h:outputText class="col-form-label-sm" value="#{facturaController.selected.fechaCreacion}" title="#{bundle.ViewFacturaTitle_fechaCreacion}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText class="col-form-label-sm" value="#{bundle.ViewFacturaLabel_incioPeriodo}"/>
+                                <h:outputText class="col-form-label-sm" value="#{facturaController.selected.incioPeriodo}" title="#{bundle.ViewFacturaTitle_incioPeriodo}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText class="col-form-label-sm" value="#{bundle.ViewFacturaLabel_finPeriodo}"/>
+                                <h:outputText class="col-form-label-sm" value="#{facturaController.selected.finPeriodo}" title="#{bundle.ViewFacturaTitle_finPeriodo}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText class="col-form-label-sm" value="#{bundle.ViewFacturaLabel_totalhoras}"/>
+                                <h:outputText class="col-form-label-sm" value="#{facturaController.selected.totalhoras}" title="#{bundle.ViewFacturaTitle_totalhoras}"/>
+
+                                <h:outputText class="col-form-label-sm" value="#{bundle.ViewFacturaLabel_tutoresidTutores}"/>
+                                <h:outputText class="col-form-label-sm" value="#{facturaController.selected.tutores.users.nombre}" title="#{bundle.ViewFacturaTitle_tutoresidTutores}"/>
+                            </h:panelGrid>
+                            <br/>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h:commandButton class="btn-sm btn-danger" action="#{facturaController.destroyAndView}" value="#{bundle.ViewFacturaDestroyLink}"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h:link class="btn-sm btn-primary" outcome="Edit" value="#{bundle.ViewFacturaEditLink}"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h:commandButton class="btn-sm btn-success" action="#{facturaController.prepareCreate}" value="#{bundle.ViewFacturaCreateLink}" />
+                                </div>
+                            </div>
+                            <br/>
+                            
+                            <h:commandButton class="btn-sm btn-dark" action="#{facturaController.prepareList}" value="#{bundle.ViewFacturaShowAllLink}"/>
+
+
+                           
+
+                        </section>
+                    </div>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
 </html>

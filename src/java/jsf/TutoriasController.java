@@ -8,9 +8,10 @@ import jpa.entidades.Tutorias;
 import jsf.util.JsfUtil;
 import jsf.util.PaginationHelper;
 import jpa.sessions.TutoriasFacade;
-
+import jpa.sessions.TutoresFacade;
 import java.io.Serializable;
 import static java.util.Collections.list;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,14 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.Part;
+import jpa.entidades.Asignatura;
+import jpa.entidades.Estudiantes;
+import jpa.entidades.TipoClase;
+import jpa.entidades.Tutores;
 import jpa.entidades.Users;
+import jpa.entidades.Virpres;
+import jpa.sessions.UsersFacade;
+
 
 @Named("tutoriasController")
 @SessionScoped
@@ -38,6 +46,26 @@ public class TutoriasController implements Serializable {
     private DataModel items = null;
     @EJB
     private jpa.sessions.TutoriasFacade ejbFacade;
+    @EJB
+    private jpa.sessions.TutoresFacade tutores;
+    @EJB
+    private jpa.sessions.UsersFacade Usuariocrear;
+    @EJB
+    private jpa.sessions.AsignaturaFacade Asignaturas;
+    @EJB
+    private jpa.sessions.EstudiantesFacade Estudiantes;
+    @EJB
+    private jpa.sessions.TipoClaseFacade TipoClase;
+    @EJB
+    private jpa.sessions.VirpresFacade VirPres;
+
+    public UsersFacade getUsuariocrear() {
+        return Usuariocrear;
+    }
+
+    public TutoresFacade getTutores() {
+        return tutores;
+    }
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private  DonutModel donutModel;
@@ -45,6 +73,7 @@ public class TutoriasController implements Serializable {
     private String nombre;
     private String pathReal;
     private String mensaje;
+    
 
     public String getMensaje() {
         return mensaje;
@@ -59,7 +88,9 @@ public class TutoriasController implements Serializable {
     private List<Tutorias> ListaTutorias;
     
    private List<Tutorias[]> ListaTutorias2;
+  
 
+    
     public List<Tutorias> getListaTutorias() {
         ListaTutorias = ejbFacade.findAll();
         return ListaTutorias;
@@ -78,8 +109,31 @@ public class TutoriasController implements Serializable {
         this.ListaTutorias = ListaTutorias;
     }
     
+    public List<Tutores> listaTutores(){
+        System.out.println("Esta es la lista de tutores mirela a ver: "+tutores.findAll());
+        return tutores.findAll();
+    }
     
+    public List<Asignatura> listaAsignaturas(){
+        return Asignaturas.findAll();
+    }
     
+    public List<Estudiantes> listaEstudiantes(){
+        return Estudiantes.findAll();
+    }
+    
+    public List<TipoClase> listaTipoClase(){
+        return TipoClase.findAll();
+    }
+    
+    public List<Virpres> listaVirPres(){
+        return VirPres.findAll();
+    }
+    
+    public List<Users> listaUsers(){
+        System.out.println("Esta es la lista de usuarios mirela a ver: "+Usuariocrear.findAll());
+        return Usuariocrear.findAll();
+    }
     
 
     public DonutModel getDonutModel() {
@@ -200,6 +254,14 @@ public class TutoriasController implements Serializable {
 
     public String create() {
         try {
+            Object id = FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getSessionMap()
+                .get("UserId");
+               
+            Users user = getFacade().getRef(Users.class, id);
+            current.setUsers(user);
+            current.setCreacion(new Date());
             System.out.println("usuario"+current);
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TutoriasCreated"));
@@ -218,6 +280,17 @@ public class TutoriasController implements Serializable {
 
     public String update() {
         try {
+            Object id = FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getSessionMap()
+                .get("UserId");
+               
+            Users user = getFacade().getRef(Users.class, id);
+            current.setUsers(user);
+            current.setCreacion(new Date());
+            System.out.println("usuario"+current);
+            
+            
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TutoriasUpdated"));
             return "View";
@@ -339,9 +412,9 @@ public class TutoriasController implements Serializable {
     
     //Carga masiva de información
     public String upload() {
-        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("Archivos");
-        path = path.substring(0, path.indexOf("\\build"));
-        path = path + "\\web\\Archivos\\";
+       // String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("Archivos");
+//        path = path.substring(0, path.indexOf("\\build"));
+    String   path =  "C:\\web\\Archivos\\";
         try {
          this.nombre = file.getSubmittedFileName();
             pathReal = "/web/Archivos/" + nombre;

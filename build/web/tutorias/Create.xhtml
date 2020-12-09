@@ -7,81 +7,113 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
-        
+
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                        <h:panelGrid frame="above" columns="2">
+                            
+                        </h:panelGrid>
+                        <section class="section-form m-auto col-md-8 "  id="createTutoria" >
+                            
+                            <div class="row" align="center">
+
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Crear Tutoría</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+                            <h:panelGrid columns="2">
+                        
+                        <h:outputLabel value="#{bundle.CreateTutoriasLabel_fecha}" for="fecha" class="col-form-label-sm"/>
+                        <h:inputText id="fecha" value="#{tutoriasController.selected.fecha}" class="form-control" title="#{bundle.CreateTutoriasTitle_fecha}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:inputText>
+
+                        <h:outputLabel value="#{bundle.CreateTutoriasLabel_transporte}" for="transporte" class="col-form-label-sm" />
+                        <h:inputText id="transporte" class="form-control" value="#{tutoriasController.selected.transporte}" title="#{bundle.CreateTutoriasTitle_transporte}" />
+                        <h:outputLabel value="#{bundle.CreateTutoriasLabel_total}" for="total" class="col-form-label-sm"/>
+                        <h:inputText id="total" class="form-control" value="#{tutoriasController.selected.total}" title="#{bundle.CreateTutoriasTitle_total}" />
+                        <h:outputLabel value="#{bundle.CreateTutoriasLabel_horainicio}" for="horainicio" class="col-form-label-sm"/>
+                        <h:inputText id="horainicio" class="form-control" value="#{tutoriasController.selected.horainicio}" title="#{bundle.CreateTutoriasTitle_horainicio}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_horainicio}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:inputText>
+                        <h:outputLabel value="#{bundle.CreateTutoriasLabel_horafin}" for="horafin" class="col-form-label-sm"/>
+                        <h:inputText id="horafin" class="form-control" value="#{tutoriasController.selected.horafin}" title="#{bundle.CreateTutoriasTitle_horafin}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_horafin}">
+                            <f:convertDateTime pattern="HH:mm:ss" />
+                        </h:inputText>
+                        <h:outputLabel value="#{bundle.CreateTutoriasLabel_cantidadHoras}" for="cantidadHoras" class="col-form-label-sm"/>
+                        <h:inputText id="cantidadHoras" class="form-control" value="#{tutoriasController.selected.cantidadHoras}" title="#{bundle.CreateTutoriasTitle_cantidadHoras}" />
+                        <h:outputLabel value="#{bundle.CreateTutoriasLabel_paga}" for="paga" class="col-form-label-sm"/>
+                        <h:inputText id="paga" class="form-control" value="#{tutoriasController.selected.paga}" title="#{bundle.CreateTutoriasTitle_paga}" />
+
+                        <p:outputLabel value="#{bundle.CreateTutoriasLabel_tutoresidTutores}" for="tutor" class="col-form-label-sm"/>
+                        <h:selectOneMenu id="tutor" class="custom-select" value="#{tutoriasController.selected.tutores}"
+
+                                         required="true"
+                                         requiredMessage="Tutor es Requerido">
+                            <f:selectItems value="#{tutoriasController.listaTutores()}" var="tutor"  
+                                           itemLabel="#{tutor.users.nombre}&#32;#{tutor.users.apellidos}"
+                                           itemValue="#{item}"/>
+                        </h:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTutoriasLabel_asignaturaidAsignatura}" for="asignaturaidAsignatura" class="col-form-label-sm" />
+                        <h:selectOneMenu id="asignaturaidAsignatura" class="custom-select" value="#{tutoriasController.selected.asignatura}" 
+                                         required="true" 
+                                         requiredMessage="La asignatura es requerida">
+                            <f:selectItems value="#{tutoriasController.listaAsignaturas()}" var="item"
+                                           itemLabel="#{item.nombreAsignatura}"
+                                           itemValue="#{item}"
+                                           />
+                        </h:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTutoriasLabel_estudiantesidEstudiantes}" for="estudiantesidEstudiantes" class="col-form-label-sm"/>
+                        <h:selectOneMenu id="estudiantesidEstudiantes" class="custom-select" value="#{tutoriasController.selected.estudiantes}" 
+                                         required="true" 
+                                         requiredMessage="Debe seleccionar un estudiante">
+                            <f:selectItems value="#{tutoriasController.listaEstudiantes()}"
+                                           var="Estudiante"
+                                           itemLabel="#{Estudiante.users.nombre}&#32;#{Estudiante.users.apellidos}"
+                                           itemValue="#{Estudiante}"/>
+                        </h:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTutoriasLabel_tipoClaseidTipoClase}" for="tipoClaseidTipoClase" class="col-form-label-sm"/>
+                        <h:selectOneMenu id="tipoClaseidTipoClase" class="custom-select" value="#{tutoriasController.selected.tipoClase}" 
+                                         required="true" requiredMessage="Seleccione el tipo de clase">
+                            <f:selectItems value="#{tutoriasController.listaTipoClase()}"
+                                           var="Tclase"
+                                           itemLabel="#{Tclase.descripcion}"
+                                           itemValue="#{Tclase}"/>
+                        </h:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTutoriasLabel_virPresidVirPres}" for="virPresidVirPres" class="col-form-label-sm"/>
+                        <h:selectOneMenu id="virPresidVirPres" class="custom-select" value="#{tutoriasController.selected.virpres}" 
+                                         required="true" requiredMessage="Especifique VIrtual o Presencial">
+                            <f:selectItems value="#{tutoriasController.listaVirPres()}"
+                                           var="VirPres"
+                                           itemLabel="#{VirPres.descrip}"
+                                           itemValue="#{VirPres}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                            <div class="row"></div>
+                            <br/>
+                         <div class="col-md-6">
+                        <h:commandButton action="#{tutoriasController.prepareList}" class="btn-sm btn-danger" value="Regresar a tutorias" immediate="true"/>
+                    </div>
+                            
+                           
+                            <h:commandButton action="#{tutoriasController.create}" value="Guardar" class="btn-sm btn-success "/>
+                        </section>
+
+                    </div>
+                                 
                     
-        <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_fecha}" for="fecha" />
-                    <h:inputText id="fecha" value="#{tutoriasController.selected.fecha}" title="#{bundle.CreateTutoriasTitle_fecha}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_creacion}" for="creacion" />
-                    <h:inputText id="creacion" value="#{tutoriasController.selected.creacion}" title="#{bundle.CreateTutoriasTitle_creacion}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_transporte}" for="transporte" />
-                    <h:inputText id="transporte" value="#{tutoriasController.selected.transporte}" title="#{bundle.CreateTutoriasTitle_transporte}" />
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_total}" for="total" />
-                    <h:inputText id="total" value="#{tutoriasController.selected.total}" title="#{bundle.CreateTutoriasTitle_total}" />
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_horainicio}" for="horainicio" />
-                    <h:inputText id="horainicio" value="#{tutoriasController.selected.horainicio}" title="#{bundle.CreateTutoriasTitle_horainicio}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_horainicio}">
-                        <f:convertDateTime pattern="HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_horafin}" for="horafin" />
-                    <h:inputText id="horafin" value="#{tutoriasController.selected.horafin}" title="#{bundle.CreateTutoriasTitle_horafin}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_horafin}">
-                        <f:convertDateTime pattern="HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_cantidadHoras}" for="cantidadHoras" />
-                    <h:inputText id="cantidadHoras" value="#{tutoriasController.selected.cantidadHoras}" title="#{bundle.CreateTutoriasTitle_cantidadHoras}" />
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_paga}" for="paga" />
-                    <h:inputText id="paga" value="#{tutoriasController.selected.paga}" title="#{bundle.CreateTutoriasTitle_paga}" />
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_usersidUser}" for="usersidUser" />
-                    <h:selectOneMenu id="usersidUser" value="#{tutoriasController.selected.users}" title="#{bundle.CreateTutoriasTitle_usersidUser}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_usersidUser}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    
-                    <p:outputLabel value="#{bundle.CreateTutoriasLabel_tutoresidTutores}" for="tutoresidTutores" />
-                    <p:autoComplete
-                        id="tutor" value="#{tutoriasController.selected.tutores}"
-                        completeMethod="#{tutoresController.listarTutores()}" var="item"
-                        converter="TutoresConverter" itemLabel="#{item}" minQueryLength="5"
-                        itemValue="#{item}"                       
-                    </p:autoComplete>
-                    
-                    
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_asignaturaidAsignatura}" for="asignaturaidAsignatura" />
-                    <h:selectOneMenu id="asignaturaidAsignatura" value="#{tutoriasController.selected.asignatura}" title="#{bundle.CreateTutoriasTitle_asignaturaidAsignatura}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_asignaturaidAsignatura}">
-                        <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_estudiantesidEstudiantes}" for="estudiantesidEstudiantes" />
-                    <h:selectOneMenu id="estudiantesidEstudiantes" value="#{tutoriasController.selected.estudiantes}" title="#{bundle.CreateTutoriasTitle_estudiantesidEstudiantes}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_estudiantesidEstudiantes}">
-                        <f:selectItems value="#{estudiantesController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_tipoClaseidTipoClase}" for="tipoClaseidTipoClase" />
-                    <h:selectOneMenu id="tipoClaseidTipoClase" value="#{tutoriasController.selected.tipoClase}" title="#{bundle.CreateTutoriasTitle_tipoClaseidTipoClase}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_tipoClaseidTipoClase}">
-                        <f:selectItems value="#{tipoClaseController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateTutoriasLabel_virPresidVirPres}" for="virPresidVirPres" />
-                    <h:selectOneMenu id="virPresidVirPres" value="#{tutoriasController.selected.virpres}" title="#{bundle.CreateTutoriasTitle_virPresidVirPres}" required="true" requiredMessage="#{bundle.CreateTutoriasRequiredMessage_virPresidVirPres}">
-                        <f:selectItems value="#{virpresController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{tutoriasController.create}" value="#{bundle.CreateTutoriasSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{tutoriasController.prepareList}" value="#{bundle.CreateTutoriasShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateTutoriasIndexLink}"/>
-            </h:form>
-        </ui:define>
-    </ui:composition>
+                   
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </body>
 </html>

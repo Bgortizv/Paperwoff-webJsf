@@ -22,6 +22,11 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
+    public <G> G getRef(Class<G> entityClass, Object entityId) {
+        G entity = getEntityManager().getReference(entityClass, entityId);
+        return entity;
+	}
+
     public void create(T entity) {
         getEntityManager().persist(entity);
     }

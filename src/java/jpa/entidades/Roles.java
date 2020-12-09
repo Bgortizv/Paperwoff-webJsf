@@ -99,7 +99,7 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entidades.Roles[ idRole=" + idRole + " ]";
+        return  idRole.toString() ;
     }
     
 }

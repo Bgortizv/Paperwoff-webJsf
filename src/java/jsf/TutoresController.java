@@ -8,6 +8,7 @@ import jpa.sessions.TutoresFacade;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -18,6 +19,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import jpa.entidades.Roles;
+import jpa.entidades.Users;
 
 @Named("tutoresController")
 @SessionScoped
@@ -29,16 +32,33 @@ public class TutoresController implements Serializable {
     private jpa.sessions.TutoresFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private Tutores tutores;
-    
+    private long selectedUser;
+    private List<Tutores> ListaTutores;
+    @EJB
+    private jpa.sessions.UsersFacade usuarios;
+
     public List<Tutores> listarTutores() {
-        System.out.println(""+ejbFacade.findAll());  
         return ejbFacade.findAll();
-          
     }
-    
+
+    public List<Tutores> getListaTutores() {
+        ListaTutores = ejbFacade.findAll();
+        return ListaTutores;
+    }
 
     public TutoresController() {
+    }
+
+    public List<Users> getAvailableUsers() {
+        List<Long> idTutores = this.listarTutores()
+                .stream()
+                .map(tutor -> tutor.getUsers().getIdUser())
+                .collect(Collectors.toList());
+
+        return usuarios.findAll()
+                .stream()
+                .filter(usuario -> !idTutores.contains(usuario.getIdUser()))
+                .collect(Collectors.toList());
     }
 
     public Tutores getSelected() {
@@ -47,6 +67,14 @@ public class TutoresController implements Serializable {
             selectedItemIndex = -1;
         }
         return current;
+    }
+
+    public long getSelectedUser() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(long selectedUser) {
+        this.selectedUser = selectedUser;
     }
 
     private TutoresFacade getFacade() {
@@ -90,7 +118,13 @@ public class TutoresController implements Serializable {
 
     public String create() {
         try {
+            Roles role = new Roles();
+            Users user = getFacade().getRef(Users.class, this.selectedUser);
+            current.setUsers(user);
             getFacade().create(current);
+            role.setIdRole(2);
+            user.setRoles(role);
+            usuarios.edit(user);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("TutoresCreated"));
             return prepareCreate();
         } catch (Exception e) {

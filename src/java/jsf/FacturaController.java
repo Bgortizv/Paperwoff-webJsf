@@ -6,6 +6,7 @@ import jsf.util.PaginationHelper;
 import jpa.sessions.FacturaFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -18,6 +19,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import jpa.entidades.Tutores;
 
 @Named("facturaController")
 @SessionScoped
@@ -34,6 +36,9 @@ public class FacturaController implements Serializable {
     private List<Factura[]> ListaFactura2;
     private List<Factura> ListaFactura3;
     
+    @EJB
+    private jpa.sessions.TutoresFacade tutores;
+    
     public List<Factura> getListaFactura() {
       ListaFactura =   ejbFacade.findAll();
         return ListaFactura;
@@ -47,7 +52,11 @@ public class FacturaController implements Serializable {
         return ListaFactura2;
 
     }
-    
+
+
+    public List<Tutores> listaTutores(){
+        return tutores.findAll();
+    }
 //    public List<Factura> getListaFactura3() {
 //        
 //        long  os = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("UserId").toString()) ; 
@@ -115,6 +124,7 @@ public class FacturaController implements Serializable {
 
     public String create() {
         try {
+            current.setFechaCreacion(new Date());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("FacturaCreated"));
             return prepareCreate();

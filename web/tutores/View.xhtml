@@ -5,41 +5,64 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<body>
-    <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+    <body>
+        <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
 
-        <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewTutoresLabel_idTutores}"/>
-                    <h:outputText value="#{tutoresController.selected.idTutores}" title="#{bundle.ViewTutoresTitle_idTutores}"/>
-                    <h:outputText value="#{bundle.ViewTutoresLabel_fechaIngreso}"/>
-                    <h:outputText value="#{tutoresController.selected.fechaIngreso}" title="#{bundle.ViewTutoresTitle_fechaIngreso}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewTutoresLabel_profesion}"/>
-                    <h:outputText value="#{tutoresController.selected.profesion}" title="#{bundle.ViewTutoresTitle_profesion}"/>
-                    <h:outputText value="#{bundle.ViewTutoresLabel_users}"/>
-                    <h:outputText value="#{tutoresController.selected.users}" title="#{bundle.ViewTutoresTitle_usersidUser}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{tutoresController.destroyAndView}" value="#{bundle.ViewTutoresDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewTutoresEditLink}"/>
-                <br />
-                <h:commandLink action="#{tutoresController.prepareCreate}" value="#{bundle.ViewTutoresCreateLink}" />
-                <br />
-                <h:commandLink action="#{tutoresController.prepareList}" value="#{bundle.ViewTutoresShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewTutoresIndexLink}"/>
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                        <h:panelGrid columns="2"></h:panelGrid>
+                        <section class="section-form m-auto col-md-8 "  id="createTutoria" >
+                            <div class="row" align="center">
 
-            </h:form>
-        </ui:define>
-    </ui:composition>
-</body>
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Detalle Tutor</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+                            <h:panelGrid columns="2">
+
+                                <h:outputText value="#{bundle.ViewTutoresLabel_idTutores}" class="label-primary"/>
+                                <h:outputText value="#{tutoresController.selected.idTutores}" class="label-primary" title="#{bundle.ViewTutoresTitle_idTutores}"/>
+                                <h:outputText class="form-label-group" value="#{bundle.ViewTutoresLabel_fechaIngreso}"/>
+                                <h:outputText class="label-info" value="#{tutoresController.selected.fechaIngreso}" title="#{bundle.ViewTutoresTitle_fechaIngreso}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                                <h:outputText value="#{bundle.ViewTutoresLabel_profesion}"/>
+                                <h:outputText value="#{tutoresController.selected.profesion}" title="#{bundle.ViewTutoresTitle_profesion}"/>
+
+                            </h:panelGrid>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h:commandButton class="btn-sm btn-danger"  action="#{tutoresController.destroyAndView}" value="#{bundle.ViewTutoresDestroyLink}"/>
+                                </div>
+                                <div class="col-md-4">    
+                                    <h:link outcome="Edit" value="#{bundle.ViewTutoresEditLink}"/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h:commandButton class="btn-sm btn-success" action="#{tutoresController.prepareCreate}" value="#{bundle.ViewTutoresCreateLink}" />
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row" align="center">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-md-6" align="center">
+                                    <h:commandButton class="btn-sm btn-dark" action="#{tutoresController.prepareList}" value="#{bundle.ViewTutoresShowAllLink}"/>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                            <br />
+
+                        </section>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>

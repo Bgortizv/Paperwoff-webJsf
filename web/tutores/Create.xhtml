@@ -6,37 +6,56 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-        
+
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
+
+            <ui:define name="content">
+
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                    <h:panelGrid columns="2"></h:panelGrid>
+                    <section class="section-form m-auto col-md-8 "  id="createTutoria" >
+                        
+                        <div class="row" align="center">
+
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Crear Tutor</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+                            <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.CreateTutoresLabel_fechaIngreso}" class="col-form-label-sm" for="fechaIngreso" />
+                        <h:inputText class="form-control" id="fechaIngreso" value="#{tutoresController.selected.fechaIngreso}" title="#{bundle.CreateTutoresTitle_fechaIngreso}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:inputText>
+                        <h:outputLabel value="#{bundle.CreateTutoresLabel_profesion}" class="col-form-label-sm" for="profesion" />
+                        <h:inputText class="form-control" id="profesion" value="#{tutoresController.selected.profesion}" title="#{bundle.CreateTutoresTitle_profesion}" />
+                        <h:outputLabel value="#{bundle.CreateTutoresLabel_nombre}" class="col-form-label-sm" for="Nombre" />
+                        <h:selectOneMenu class="custom-select" id="usersidUser" value="#{tutoresController.selectedUser}" title="#{bundle.CreateTutoresTitle_usersidUser}" required="true" requiredMessage="#{bundle.CreateTutoresRequiredMessage_usersidUser}">
+                            <f:selectItems
+                                value="#{tutoresController.availableUsers}"
+                                var="user"
+                                itemValue="#{user.idUser}"
+                                itemLabel="#{user.nombre}&#32;#{user.apellidos}"
+                                />
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                            <br/><br/>
+                            <div class="row"></div>
+                            <div class="col-sm-6" align="right">      
+                    <h:commandButton class="btn-sm btn-danger" action="#{tutoresController.prepareList}" value="Regresar a tutores" immediate="true"/>
+                    </div>
+                           
+                    <h:commandButton class="btn-sm btn-success" action="#{tutoresController.create}" value="Guardar" />
                     
-        <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                   
-                    <h:outputLabel value="#{bundle.CreateTutoresLabel_fechaIngreso}" for="fechaIngreso" />
-                    <h:inputText id="fechaIngreso" value="#{tutoresController.selected.fechaIngreso}" title="#{bundle.CreateTutoresTitle_fechaIngreso}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateTutoresLabel_profesion}" for="profesion" />
-                    <h:inputText id="profesion" value="#{tutoresController.selected.profesion}" title="#{bundle.CreateTutoresTitle_profesion}" />
-                    <h:outputLabel value="#{bundle.CreateTutoresLabel_nombre}" for="Nombre" />
-                    <h:selectOneMenu id="usersidUser" value="#{tutoresController.selected.users}" title="#{bundle.CreateTutoresTitle_usersidUser}" required="true" requiredMessage="#{bundle.CreateTutoresRequiredMessage_usersidUser}">
-                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{tutoresController.create}" value="#{bundle.CreateTutoresSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{tutoresController.prepareList}" value="#{bundle.CreateTutoresShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateTutoresIndexLink}"/>
-            </h:form>
-        </ui:define>
-    </ui:composition>
+                    </section>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </body>
 </html>

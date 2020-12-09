@@ -18,6 +18,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import jpa.entidades.Tutores;
 
 @Named("disponibilidadController")
 @SessionScoped
@@ -30,11 +31,23 @@ public class DisponibilidadController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Disponibilidad> Listadisponibles;
-     private List<Disponibilidad[]> ListaDisponibles2;
-
+    private List<Disponibilidad[]> ListaDisponibles2;
+    @EJB
+    private jpa.sessions.TutoresFacade tutores;
+    private List<Tutores> listaTutores;
+    
+    
+    
     public DisponibilidadController() {
     }
 
+    public List<Tutores> getListaTutores() {
+        listaTutores = tutores.findAll();
+        return listaTutores;
+    }
+
+    
+    
     public List<Disponibilidad> getListadisponibles() {
          Listadisponibles =  ejbFacade.findAll();
         return Listadisponibles;
@@ -51,6 +64,10 @@ public class DisponibilidadController implements Serializable {
                 System.out.println("Lista tutorias: "+ListaDisponibles2);
         return ListaDisponibles2;
 
+    }
+    
+    public List<Tutores> ListaTutores(){
+        return tutores.findAll();
     }
     
 

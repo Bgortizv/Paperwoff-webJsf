@@ -7,83 +7,93 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
-        
+
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
-                    
-        <ui:define name="content">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListTutoresEmpty}" rendered="#{tutoresController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{tutoresController.items.rowCount > 0}">
-                    <h:outputText value="#{tutoresController.pagination.pageFirstItem + 1}..#{tutoresController.pagination.pageLastItem + 1}/#{tutoresController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{tutoresController.previous}" value="#{bundle.Previous} #{tutoresController.pagination.pageSize}" rendered="#{tutoresController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{tutoresController.next}" value="#{bundle.Next} #{tutoresController.pagination.pageSize}" rendered="#{tutoresController.pagination.hasNextPage}"/>&nbsp;
-             <div class="row">            
-                <div class="col-sm-12">
-                    <div class="card-box table-responsive">
-                        <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
-                            <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
-                                
-                    
-                    <p:dataTable id="tutores" value="#{tutoresController.items}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline"  style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTutoresTitle_idTutores}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idTutores}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTutoresTitle_fechaIngreso}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fechaIngreso}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTutoresTitle_profesion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.profesion}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTutoresTitle_users}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.users}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{tutoresController.prepareView}" value="#{bundle.ListTutoresViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{tutoresController.prepareEdit}" value="#{bundle.ListTutoresEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{tutoresController.destroy}" value="#{bundle.ListTutoresDestroyLink}"/>
-                        </p:column>
-                    </p:dataTable>
+
+            <ui:define name="content">
+                <h:form styleClass="jsfcrud_list_form">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListTutoresEmpty}" rendered="#{tutoresController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{tutoresController.items.rowCount > 0}">
+                        <h:outputText value="#{tutoresController.pagination.pageFirstItem + 1}..#{tutoresController.pagination.pageLastItem + 1}/#{tutoresController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{tutoresController.previous}" value="#{bundle.Previous} #{tutoresController.pagination.pageSize}" rendered="#{tutoresController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{tutoresController.next}" value="#{bundle.Next} #{tutoresController.pagination.pageSize}" rendered="#{tutoresController.pagination.hasNextPage}"/>&nbsp;
+                        <br/><br/>
+                        <div class="row">
+                            <br/>
+                            <div class="row" align="center">
+                                <br/><br/>
+                                <div class="col-md-6" align="center">
+                                    <h:commandButton action="#{tutoresController.prepareCreate}" class="btn-sm btn-info" value="Crear Nuevo Tutor"/>
+                                </div>
                             </div>
+                            <br/>
+                            <br/><br/><br/>
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    <div id="datatable-responsive_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+                                        <div class="row" style="overflow-x: auto; overflow-y: scroll; height: 500px;">
+
+
+                                            <p:dataTable id="tutores" value="#{tutoresController.listaTutores}" var="item" class="table table-striped jambo_table bulk_action dt-responsive nowrap dataTable no-footer dtr-inline"  style="border:solid 1px; overflow-x: auto; overflow-y: scroll;">
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Nombre"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.users.nombre}"/>&nbsp;
+                                                    <h:outputText value="#{item.users.apellidos}"/>&nbsp;
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Fecha Ingreso"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.fechaIngreso}">
+                                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Profesión"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.profesion}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Celular"/>
+                                                    </f:facet>
+                                                    <h:outputText value="#{item.users.celular}"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="&nbsp;"/>
+                                                    </f:facet>
+                                                    <h:commandButton class="btn-sm btn-secondary btn-round" action="#{tutoresController.prepareView}" value="Ver"/>
+                                                    <h:outputText value=" "/>
+                                                    <h:commandButton class="btn-sm btn-success btn-round" action="#{tutoresController.prepareEdit}" value="Editar"/>
+                                                    <h:outputText value=" "/>
+                                                    <h:commandButton class="btn-sm btn-danger btn-round" action="#{tutoresController.destroy}" value="Eliminar"/>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                            </div>
-             </div>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{tutoresController.prepareCreate}" value="#{bundle.ListTutoresCreateLink}"/>
-                <br />
-                <br />
-                <div style="float:right;padding-top: 5px;">
-                 <h:commandLink>
-                    <p:graphicImage name="/images/excel.png" width="24"/>
-                    <p:dataExporter type="xls" target="tutores" fileName="Tutores" pageOnly="true" />
-                </h:commandLink>
-                </div>
-                <h:link outcome="/index" value="#{bundle.ListTutoresIndexLink}"/>
-            </h:form>
-        </ui:define>
-    </ui:composition>
+                    </h:panelGroup>
+                    <br />
+
+                    <br />
+                    <br />
+                    <div style="float:right;padding-top: 5px;">
+                        <h:commandLink>
+                            <p:graphicImage name="/images/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="tutores" fileName="Tutores" pageOnly="true" />
+                        </h:commandLink>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </body>
 </html>

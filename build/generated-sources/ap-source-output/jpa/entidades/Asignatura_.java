@@ -8,7 +8,7 @@ import jpa.entidades.Asignaturaxtutor;
 import jpa.entidades.DetalleFactura;
 import jpa.entidades.Tutorias;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-10-02T17:59:08")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-12-04T22:13:02")
 @StaticMetamodel(Asignatura.class)
 public class Asignatura_ { 
 

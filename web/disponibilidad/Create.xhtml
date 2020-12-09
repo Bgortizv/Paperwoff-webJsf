@@ -6,46 +6,69 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-   <body>
-        
+    <body>
+
         <ui:composition template="../Pagina Maestra/newTemplate.xhtml">
-                    
-        <ui:define name="content">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateDisponibilidadLabel_idDisponibilidad}" for="idDisponibilidad" />
-                    <h:inputText id="idDisponibilidad" value="#{disponibilidadController.selected.idDisponibilidad}" title="#{bundle.CreateDisponibilidadTitle_idDisponibilidad}" required="true" requiredMessage="#{bundle.CreateDisponibilidadRequiredMessage_idDisponibilidad}"/>
-                    <h:outputLabel value="#{bundle.CreateDisponibilidadLabel_fecha}" for="fecha" />
-                    <h:inputText id="fecha" value="#{disponibilidadController.selected.fecha}" title="#{bundle.CreateDisponibilidadTitle_fecha}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateDisponibilidadLabel_horainicio}" for="horainicio" />
-                    <h:inputText id="horainicio" value="#{disponibilidadController.selected.horainicio}" title="#{bundle.CreateDisponibilidadTitle_horainicio}" >
-                        <f:convertDateTime pattern="HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateDisponibilidadLabel_horafin}" for="horafin" />
-                    <h:inputText id="horafin" value="#{disponibilidadController.selected.horafin}" title="#{bundle.CreateDisponibilidadTitle_horafin}" >
-                        <f:convertDateTime pattern="HH:mm:ss" />
-                    </h:inputText>
-                    <p:outputLabel value="#{bundle.CreateDisponibilidadLabel_tutoresidTutores}" for="tutoresidTutores" />
-                    <p:autoComplete id="tutoresidTutores" value="#{disponibilidadController.selected.tutores}" completeMethod="#{tutoresController.listarTutores()}" var="item"
-                                                    converter="TutoresConverter" itemLabel="#{item}"
-                                                       itemValue="#{item}"> 
-                    </p:autoComplete>>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{disponibilidadController.create}" value="#{bundle.CreateDisponibilidadSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{disponibilidadController.prepareList}" value="#{bundle.CreateDisponibilidadShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateDisponibilidadIndexLink}"/>
-            </h:form>
-        </ui:define>
-    </ui:composition>
-   </body>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8" align="center">
+                        <h:panelGrid frame="above" columns="2">
+
+                        </h:panelGrid>
+                        <section class="section-form m-auto col-md-8 "  id="createTutoria" >
+
+                            <div class="row" align="center">
+
+                                <div class="col-12 text-center pt-4">
+                                    <h2>Crear Disponibilidad</h2>
+                                </div>
+                            </div>
+                            <hr></hr>
+
+                            <h:panelGrid columns="2">
+
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.CreateDisponibilidadLabel_fecha}" for="fecha" />
+                                <h:inputText class="col-form-label-sm" id="fecha" value="#{disponibilidadController.selected.fecha}" title="#{bundle.CreateDisponibilidadTitle_fecha}" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:inputText>
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.CreateDisponibilidadLabel_horainicio}" for="horainicio" />
+                                <h:inputText class="col-form-label-sm" id="horainicio" value="#{disponibilidadController.selected.horainicio}" title="#{bundle.CreateDisponibilidadTitle_horainicio}" >
+                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                </h:inputText>
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.CreateDisponibilidadLabel_horafin}" for="horafin" />
+                                <h:inputText class="col-form-label-sm" id="horafin" value="#{disponibilidadController.selected.horafin}" title="#{bundle.CreateDisponibilidadTitle_horafin}" >
+                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                </h:inputText>
+                                <h:outputLabel class="col-form-label-sm" value="#{bundle.CreateDisponibilidadLabel_tutoresidTutores}" for="tutoresidTutores" />
+                                <h:selectOneMenu  id="tutoresidTutores" class="custom-select" value="#{disponibilidadController.selected.tutores}"
+                                                  required="true"
+                                                  requiredMessage="Seleccione un tutor">
+                                    <f:selectItems value="#{disponibilidadController.listaTutores}"
+                                                   var="tutor"
+                                                   itemLabel="#{tutor.users.nombre}&#32;#{tutor.users.apellidos}"
+                                                   itemValue="#{tutor}"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-6"> 
+                                    <h:commandButton class="btn-sm btn-primary" action="#{disponibilidadController.prepareList}" value="Regresar" immediate="true"/>
+                                </div>
+                                <div class="col-md-6">   
+                                    <h:commandButton class="btn-sm btn-success" action="#{disponibilidadController.create}" value="Crear" />
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>

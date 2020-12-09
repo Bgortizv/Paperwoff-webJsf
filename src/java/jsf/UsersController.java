@@ -22,7 +22,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import static org.primefaces.component.menuitem.UIMenuItemBase.PropertyKeys.url;
+import javax.servlet.http.HttpServletRequest;
+import jpa.entidades.Roles;
 
 @Named("usersController")
 @SessionScoped
@@ -33,7 +34,35 @@ public class UsersController implements Serializable {
     private Users InicioSes;
     private DataModel items = null;
     private String fromMail;
+    private List<Users> ListaUsuarios;
+    private List<Roles> ListaRoles;
+    @EJB
+    private jpa.sessions.RolesFacade roles;
 
+    private int selectedRole;
+
+    public List<Users> getListaUsuarios() {
+        ListaUsuarios = ejbFacade.findAll();
+        return ListaUsuarios;
+    }
+
+    public List<Roles> getListaRoles() {
+        ListaRoles = roles.findAll();
+        return ListaRoles;
+    }
+
+    public int getSelectedRole() {
+        return selectedRole;
+    }
+
+    public void setSelectedRole(int selectedRole) {
+        this.selectedRole = selectedRole;
+    }
+
+//    public List<Roles> ListaRoles(){
+//        ListaRoles = roles.findAll();
+//        return ListaRoles;
+//    }
     public Users getCurrent() {
         return current;
     }
@@ -114,62 +143,60 @@ public class UsersController implements Serializable {
     public void setInicioSes(Users InicioSes) {
         this.InicioSes = InicioSes;
     }
-    
-    public String validar(){
-    Users us = new Users() ;
-    Users uscontra = new Users();
-    String url = null;
-    
-        try{
-    System.out.println("objeto " + InicioSes);
-    String documento = InicioSes.getDocumento().toString();
-String pass  = InicioSes.getPassword();
-    us= ejbFacade.ValidarUsuario(InicioSes);
-        //System.out.println("objeto 1" + us);
 
-        System.out.println("objeto 2" + us);
-        if (us!=null) {
-             uscontra= ejbFacade.ValidarContrasenia(documento,pass );
-             
-               if(uscontra!=null) {
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("NombreUsuario", uscontra.getNombre());
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserDocumento", uscontra.getDocumento());
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserId", uscontra.getIdUser());
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Contrasenia", uscontra.getPassword());
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Role", uscontra.getRoles());
-               switch (uscontra.getRoles().getIdRole()){
-                   case 1:
-                    url="/faces/Dashboard.xhtml?faces-redirect=true";
-                    break;
-                   case 2:
-                    url="/faces/tutorias/VistaTutoresList.xhtml?faces-redirect=true";
-                    break;
-                    case 3:
-                    url="/faces/tutorias/List.xhtml?faces-redirect=true";    
-               }
-               
-               
+    public String validar() {
+        Users us = new Users();
+        Users uscontra = new Users();
+        String url = null;
+
+        try {
+            System.out.println("objeto " + InicioSes);
+            String documento = InicioSes.getDocumento().toString();
+            String pass = InicioSes.getPassword();
+            us = ejbFacade.ValidarUsuario(InicioSes);
+            //System.out.println("objeto 1" + us);
+
+            System.out.println("objeto 2" + us);
+            if (us != null) {
+                uscontra = ejbFacade.ValidarContrasenia(documento, pass);
+
+                if (uscontra != null) {
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("NombreUsuario", uscontra.getNombre());
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserDocumento", uscontra.getDocumento());
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("UserId", uscontra.getIdUser());
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Contrasenia", uscontra.getPassword());
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("Role", uscontra.getRoles());
+                    switch (uscontra.getRoles().getIdRole()) {
+                        case 1:
+                            url = "/faces/Dashboard.xhtml?faces-redirect=true";
+                            break;
+                        case 2:
+                            url = "/faces/tutorias/VistaTutoresList.xhtml?faces-redirect=true";
+                            break;
+                        case 3:
+                            url = "/faces/tutorias/List.xhtml?faces-redirect=true";
+                    }
+
                 } else {
                     FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "La contraseña es incorrecta", "");
-                FacesContext.getCurrentInstance().addMessage(null, fm);
-             }      
-        }else{
-         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "La contraseña es incorrecta", "");
+                    FacesContext.getCurrentInstance().addMessage(null, fm);
+                }
+            } else {
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "usuario no existe", "");
                 FacesContext.getCurrentInstance().addMessage(null, fm);
-        
-        }
-    } catch (Exception e){
-        FacesContext.getCurrentInstance().addMessage(
+
+            }
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Contraseña incorrecta ", "datos incorrectos"));
-       
-        
+
+        }
+
+        return url;
     }
-    
-    return url;
-    }
-    
+
     private List<Users> ListaUsers;
 
     public List<Users> getListaUsers() {
@@ -183,12 +210,13 @@ String pass  = InicioSes.getPassword();
 
     public UsersController() {
     }
-    
+
     @PostConstruct
     public void init() {
-    prueba = new Users();
-    InicioSes = new Users();
+        prueba = new Users();
+        InicioSes = new Users();
     }
+
     public Users getSelected() {
         if (current == null) {
             current = new Users();
@@ -202,14 +230,13 @@ String pass  = InicioSes.getPassword();
     }
 
     public Users getPrueba() {
-    return prueba;
-    }
-    
-    public void setPrueba(Users prueba) {
-    this.prueba = prueba;
+        return prueba;
     }
 
-    
+    public void setPrueba(Users prueba) {
+        this.prueba = prueba;
+    }
+
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -244,26 +271,26 @@ String pass  = InicioSes.getPassword();
         selectedItemIndex = -1;
         return "Create";
     }
-    
-     public String ValidaInicioSes() {
-       
-       
+
+    public String ValidaInicioSes() {
+
         return "Create";
     }
 
     public Users retornar() {
-    Users retornado = new Users();
-    retornado = ejbFacade.consultaN(current.getNombre());
-    getUsers(retornado.getIdUser());
-    
-    return retornado;
+        Users retornado = new Users();
+        retornado = ejbFacade.consultaN(current.getNombre());
+        getUsers(retornado.getIdUser());
+
+        return retornado;
     }
-    
-    
+
     public String create() {
-        try {    
-            System.out.println("documento" + prueba.getDocumento());
+        try {
+
+            Roles role = roles.getRef(Roles.class, this.selectedRole);
             prueba.setEstado(true);
+            prueba.setRoles(role);
             getFacade().create(prueba);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/resources/Bundle").getString("UsersCreated"));
             return prepareCreate();
@@ -375,19 +402,18 @@ String pass  = InicioSes.getPassword();
         return ejbFacade.find(id);
     }
 
-     public void send() {
+    public void send() {
         toMail = ejbFacade.obtenerCorreos();
-         System.out.println("lista de correos "+toMail);
+        System.out.println("lista de correos " + toMail);
         try {
-            MailSender mailSender=new MailSender();
-            
-          mailSender.sendMail(fromMail, username, password, toMail, subject, message);
+            MailSender mailSender = new MailSender();
+
+            mailSender.sendMail(fromMail, username, password, toMail, subject, message);
         } catch (Exception e) {
             System.out.println("correo no enviado");
         }
     }
-    
-    
+
 //    public void probarmetodo() {
 //     for(Users usu: ejbFacade.obtenerCorreos()){
 //         System.out.println(usu);
